@@ -26,7 +26,7 @@ const ErrorInfo = ({ error }: ErrorInfoProps) => {
   );
 };
 
-export default ErrorInfo;
+export { ErrorInfo };
 
 const styles = StyleSheet.create({
   errorContainer: {

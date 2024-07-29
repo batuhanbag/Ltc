@@ -195,7 +195,7 @@ function Screen(props: ScreenProps) {
   );
 }
 
-export default Screen;
+export { Screen };
 
 const $containerStyle: ViewStyle = {
   flex: 1,
