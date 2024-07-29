@@ -2,7 +2,15 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-lifetech-components": ["./src/index"]
+      "react-native-lifetech-components": ["./src/index"],
+      "*": ["./*"],
+      "@root/*": ["./*"],
+      "@src/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@api/*": ["./src/api/*"],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@hooks/*": ["./src/hooks/*"],
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -24,6 +32,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "typeRoots": ["./node_modules/@types"]
   }
 }
