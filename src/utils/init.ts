@@ -21,16 +21,28 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
 }
 
 function initTheme(config: ThemeConfig) {
-  currentTheme = config;
+  currentTheme = config || {
+    colors: {
+      primary: 'red',
+      secondary: 'black',
+      background: 'gray',
+      text: 'white',
+      white: 'white',
+      black: 'black',
+      gray: 'gray',
+      error: 'red',
+      nonEditable: 'gray',
+      placeholder: 'gray',
+    },
+    fonts: {
+      regular: '',
+      bold: '',
+    },
+  };
 }
 
-function getTheme(): ThemeConfig {
-  if (!currentTheme) {
-    throw new Error(
-      'Theme not initialized. Call initTheme() first in your project.'
-    );
-  }
-  return currentTheme;
-}
+const getTheme = (): ThemeConfig => {
+  return currentTheme as ThemeConfig;
+};
 
 export { initAxiosInstance, initTheme, getTheme };
