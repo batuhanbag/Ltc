@@ -5,26 +5,27 @@ import {
   type TextStyle,
 } from 'react-native';
 import React from 'react';
+import { getFontSize } from '../utils/window';
 import { getTheme } from '../utils/init';
 
-type Sizes = keyof typeof Sizes;
+export type Sizes = keyof typeof Sizes;
 
 const { colors } = getTheme();
 
 const Sizes = {
-  big: { fontSize: 46 } satisfies TextStyle,
-  xxl: { fontSize: 36 } satisfies TextStyle,
-  xml: { fontSize: 32 } satisfies TextStyle,
-  xsml: { fontSize: 30 } satisfies TextStyle,
-  xl: { fontSize: 24 } satisfies TextStyle,
-  lg: { fontSize: 20 } satisfies TextStyle,
-  md: { fontSize: 18 } satisfies TextStyle,
-  sm: { fontSize: 16 } satisfies TextStyle,
-  xs: { fontSize: 14 } satisfies TextStyle,
-  xxs: { fontSize: 12 } satisfies TextStyle,
+  big: { fontSize: getFontSize(46) } satisfies TextStyle,
+  xxl: { fontSize: getFontSize(36) } satisfies TextStyle,
+  xml: { fontSize: getFontSize(32) } satisfies TextStyle,
+  xsml: { fontSize: getFontSize(30) } satisfies TextStyle,
+  xl: { fontSize: getFontSize(24) } satisfies TextStyle,
+  lg: { fontSize: getFontSize(20) } satisfies TextStyle,
+  md: { fontSize: getFontSize(18) } satisfies TextStyle,
+  sm: { fontSize: getFontSize(16) } satisfies TextStyle,
+  xs: { fontSize: getFontSize(14) } satisfies TextStyle,
+  xxs: { fontSize: getFontSize(12) } satisfies TextStyle,
 };
 
-interface TextProps extends RNTextProps {
+export interface TextProps extends RNTextProps {
   color?: string;
   text?: string;
   style?: StyleProp<TextStyle>;

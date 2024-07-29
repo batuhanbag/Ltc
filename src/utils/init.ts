@@ -5,6 +5,8 @@ export type Client = AxiosInstance;
 
 export type ClientRequest = Client['request'];
 
+let currentTheme: ThemeConfig | null = null;
+
 /**
  * @description
  * Initializes axios instance to be used in the apis.
@@ -15,33 +17,20 @@ export type ClientRequest = Client['request'];
  * base url to be used in the services
  */
 function initAxiosInstance(axiosInstance: AxiosInstance) {
-  console.log('Init Axios Instance works...');
   global.axiosInstance = axiosInstance;
 }
 
-function initTheme() {
-  console.log('Init Theme works...');
+function initTheme(config: ThemeConfig) {
+  currentTheme = config;
 }
 
 function getTheme(): ThemeConfig {
-  return {
-    colors: {
-      primary: '#5956FF',
-      secondary: '#ECEBFF',
-      error: '#FF0000',
-      black: '#000000',
-      white: '#FFFFFF',
-      nonEditable: '#F4F4F4',
-      placeholder: '#A0A09F',
-      background: '#F8F8FF',
-      text: '#191015',
-      gray: '#3F3C36',
-    },
-    fonts: {
-      regular: '',
-      bold: '',
-    },
-  };
+  if (!currentTheme) {
+    throw new Error(
+      'Theme not initialized. Call initTheme() first in your project.'
+    );
+  }
+  return currentTheme;
 }
 
 export { initAxiosInstance, initTheme, getTheme };
