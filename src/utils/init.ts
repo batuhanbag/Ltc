@@ -2,10 +2,28 @@ import type { AxiosInstance } from 'axios';
 import type { ThemeConfig } from '../../typings';
 
 export type Client = AxiosInstance;
-
 export type ClientRequest = Client['request'];
 
-let currentTheme: ThemeConfig | null = null;
+const defaultTheme: ThemeConfig = {
+  colors: {
+    primary: 'red',
+    secondary: 'black',
+    background: 'gray',
+    text: 'white',
+    white: 'white',
+    black: 'black',
+    gray: 'gray',
+    error: 'red',
+    nonEditable: 'gray',
+    placeholder: 'gray',
+  },
+  fonts: {
+    regular: '',
+    bold: '',
+  },
+};
+
+let currentTheme: ThemeConfig = defaultTheme;
 
 /**
  * @description
@@ -20,29 +38,12 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
   global.axiosInstance = axiosInstance;
 }
 
-function initTheme(config: ThemeConfig) {
-  currentTheme = config || {
-    colors: {
-      primary: 'red',
-      secondary: 'black',
-      background: 'gray',
-      text: 'white',
-      white: 'white',
-      black: 'black',
-      gray: 'gray',
-      error: 'red',
-      nonEditable: 'gray',
-      placeholder: 'gray',
-    },
-    fonts: {
-      regular: '',
-      bold: '',
-    },
-  };
+function initTheme(config: Partial<ThemeConfig>) {
+  currentTheme = { ...defaultTheme, ...config };
 }
 
 const getTheme = (): ThemeConfig => {
-  return currentTheme as ThemeConfig;
+  return currentTheme;
 };
 
 export { initAxiosInstance, initTheme, getTheme };
