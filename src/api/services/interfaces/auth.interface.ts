@@ -19,7 +19,11 @@ export interface RegisterBody {
   clientId: string;
 }
 
-export interface RegisterResponse {}
+export interface RegisterResponse {
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+}
 
 export interface LoginBody {
   email: string;
