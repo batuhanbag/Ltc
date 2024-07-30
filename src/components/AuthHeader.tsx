@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { Text } from '.';
-import { scale, verticalScale } from 'src/utils';
+import { scale, verticalScale } from '../utils/window';
 
 interface AuthHeaderProps {
   text: string;
