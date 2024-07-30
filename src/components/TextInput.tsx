@@ -6,7 +6,7 @@ import type { IconTypes } from './Icon';
 import { Text } from './Text';
 import { getFontSize, scale, verticalScale } from '../utils/window';
 import { Icon } from './Icon';
-import ErrorInfo from './ErrorInfo';
+import { ErrorInfo } from './ErrorInfo';
 
 const { colors } = getTheme();
 
