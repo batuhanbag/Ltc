@@ -1,7 +1,7 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
-import { scale, verticalScale } from 'src/utils/window';
-import { getTheme } from 'src/utils';
+import { scale, verticalScale } from '../utils/window';
+import { getTheme } from '../utils/init';
 
 interface HeaderProps {
   type:
