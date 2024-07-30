@@ -33,7 +33,7 @@ interface BaseScreenProps {
 
   KeyboardAvoidingViewProps?: KeyboardAvoidingViewProps;
 
-  statusBar: React.ReactNode;
+  statusBar?: React.ReactNode;
 }
 
 interface FixedScreenProps extends BaseScreenProps {
@@ -168,7 +168,7 @@ function ScreenWithScrolling(props: ScreenProps) {
 function Screen(props: ScreenProps) {
   const theme = getTheme();
   const {
-    backgroundColor = theme.colors.primary,
+    backgroundColor = theme.colors.background,
     KeyboardAvoidingViewProps,
     keyboardOffset = 0,
     safeAreaEdges,
