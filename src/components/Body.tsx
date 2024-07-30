@@ -10,7 +10,7 @@ const Body = ({ children }: BodyProps) => {
   return <View style={styles.root}>{children}</View>;
 };
 
-export default Body;
+export { Body };
 
 const styles = StyleSheet.create({
   root: {
