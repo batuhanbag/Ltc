@@ -1,7 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
-import { scale, verticalScale } from '../utils/window';
-import { getTheme } from '../utils/init';
+import { scale, verticalScale } from 'src/utils';
 
 interface HeaderProps {
   type:
@@ -15,6 +14,7 @@ interface HeaderProps {
   leftIcon?: IconTypes;
   rightIconPress?: () => void;
   leftIconPress?: () => void;
+  iconColor?: string;
 }
 
 const Header = ({
@@ -24,11 +24,12 @@ const Header = ({
   leftIcon,
   rightIconPress,
   leftIconPress,
+  iconColor,
 }: HeaderProps) => {
   const renderIcon = (icon?: IconTypes, onPress?: () => void) =>
     icon ? (
       <TouchableOpacity onPress={onPress}>
-        <Icon icon={icon} color={getTheme().colors.black} size={24} />
+        <Icon icon={icon} color={iconColor} size={24} />
       </TouchableOpacity>
     ) : (
       <View style={styles.iconPlaceholder} />
