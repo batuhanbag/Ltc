@@ -6,20 +6,24 @@ export type ClientRequest = Client['request'];
 
 const defaultTheme: ThemeConfig = {
   colors: {
-    primary: 'red',
-    secondary: 'black',
-    background: 'gray',
-    text: 'white',
-    white: 'white',
-    black: 'black',
-    gray: 'gray',
-    error: 'red',
-    nonEditable: 'gray',
-    placeholder: 'gray',
+    primary: '#5956FF',
+    secondary: '#ECEBFF',
+    background: '#FEF0EA',
+    text: '#161513',
+    white: '#FFFFFF',
+    black: '#000000',
+    gray: '#a3a1a0',
+    error: '#FF0000',
+    warning: '#FFC700',
+    success: '#29C141',
+    nonEditable: '#F4F4F4',
+    placeholder: '#A0A09F',
   },
   fonts: {
-    regular: '',
-    bold: '',
+    primary: '#161513',
+    secondary: '#3F3C36',
+    tertiary: '#736B66',
+    disabled: '#ACA9A5',
   },
 };
 

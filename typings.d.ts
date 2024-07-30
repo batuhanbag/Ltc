@@ -16,9 +16,13 @@ export interface ThemeConfig {
     error: string;
     nonEditable: string;
     placeholder: string;
+    warning: string;
+    success: string;
   };
   fonts: {
-    regular: string;
-    bold: string;
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    disabled: string;
   };
 }
