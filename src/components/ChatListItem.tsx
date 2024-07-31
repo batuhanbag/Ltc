@@ -6,10 +6,10 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
-import { AutoImage } from './AutoImage';
 import { Text, type TextProps } from './Text';
 import { makeStyles } from 'src/utils/makeStyles';
 import { moderateScale, scale, verticalScale, width } from 'src/utils';
+import { AutoImage } from './AutoImage';
 
 interface ChatListItemProps {
   onPress: () => void;

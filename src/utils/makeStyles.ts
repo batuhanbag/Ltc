@@ -10,7 +10,7 @@ type NamedStyles<T> = {
   [P in keyof T]: ViewStyle | TextStyle | ImageStyle;
 };
 
-export function makeStyles<
+function makeStyles<
   T extends NamedStyles<T> | NamedStyles<any>,
   TProps = unknown,
 >(
@@ -31,3 +31,5 @@ export function makeStyles<
     return useMemo(() => StyleSheet.create(styles), [styles]);
   };
 }
+
+export { makeStyles };
