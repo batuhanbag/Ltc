@@ -35,6 +35,7 @@ export interface Category {
 export interface CreateTaskRequest {
   tasks: string[];
   userId: string;
+  taskCode: string;
 }
 
 export interface TasksResponse {
@@ -128,4 +129,5 @@ export interface CreateCarePlanRequest {
   userId: string;
   goalIds: string;
   tasks: CreateTaskResponse[];
+  carePlanCategory: string;
 }

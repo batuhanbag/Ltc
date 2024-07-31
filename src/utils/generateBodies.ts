@@ -34,13 +34,17 @@ export const generateTaskTypes = (tasks: string[]) => {
   });
 };
 
-export const generateTaskBodies = (userId: string, tasks: string[]) => {
+export const generateTaskBodies = (
+  userId: string,
+  tasks: string[],
+  taskCode: string
+) => {
   const bodies = tasks?.map((taskType) => {
     return {
       status: 'in-progress',
       intent: 'plan',
       code: {
-        text: 'soulfi_greenspark',
+        text: taskCode,
       },
       owner: {
         type: 'Patient',
@@ -103,7 +107,8 @@ const generateCarePlanActivites = (tasks: CreateTaskResponse[]) => {
 export const generateCarePlanBody = (
   userId: string,
   goalIds: string,
-  tasks: CreateTaskResponse[]
+  tasks: CreateTaskResponse[],
+  carePlanCategory: string
 ) => {
   return {
     status: 'active',
@@ -116,7 +121,7 @@ export const generateCarePlanBody = (
       start: generatePeriodDateISO().start,
       end: generatePeriodDateISO().end,
     },
-    category: ['soulfi_greenspark'],
+    category: [carePlanCategory],
     title: 'Greenspark Plan',
     description: 'Soulfi users general progress tracking plan for greenspark',
     goal: [goalIds],

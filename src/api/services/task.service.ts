@@ -28,7 +28,7 @@ class TaskService implements ITaskService {
   ): Promise<CreateTaskResponse[]> {
     const { data } = await axiosInstance.post(
       '/tasks',
-      generateTaskBodies(body.userId, body.tasks)
+      generateTaskBodies(body.userId, body.tasks, body.taskCode)
     );
     return data;
   }
@@ -38,7 +38,8 @@ class TaskService implements ITaskService {
       generateCarePlanBody(
         body.userId as string,
         body.goalIds,
-        body.tasks as CreateTaskResponse[]
+        body.tasks as CreateTaskResponse[],
+        body.carePlanCategory
       )
     );
     return data;
