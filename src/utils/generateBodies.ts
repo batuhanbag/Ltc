@@ -1,3 +1,4 @@
+//@ts-ignore
 import moment from 'moment';
 import type { CreateTaskResponse, Task } from 'src/api';
 
