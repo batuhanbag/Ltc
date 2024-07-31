@@ -97,7 +97,7 @@ const useStyles = makeStyles((_props: ChatListItemProps) => ({
   },
   avatar: {
     width: _props.avatarWidth || 64,
-    height: _props.avatarWidth || 64,
+    height: _props.avatarHeight || 64,
     overflow: 'hidden',
     justifyContent: 'center',
   },
