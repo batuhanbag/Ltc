@@ -7,13 +7,8 @@ import {
   type TextStyle,
 } from 'react-native';
 import { Text, type TextProps } from './Text';
-import {
-  moderateScale,
-  scale,
-  verticalScale,
-  width,
-  makeStyles,
-} from 'src/utils';
+import { moderateScale, scale, verticalScale, width } from '../utils/window';
+import { makeStyles } from '../utils/makeStyles';
 import { AutoImage } from './AutoImage';
 
 interface ChatListItemProps {
