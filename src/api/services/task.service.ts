@@ -28,7 +28,7 @@ class TaskService implements ITaskService {
   ): Promise<CreateTaskResponse[]> {
     const bodies = generateTaskBodies(body.userId, body.tasks, body.taskCode);
     const data = await Promise.all(
-      bodies.map(async (task) => {
+      bodies?.map(async (task) => {
         const response = await axiosInstance.post('/task', task);
         return response.data as CreateTaskResponse;
       })
