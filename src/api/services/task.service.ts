@@ -2,7 +2,7 @@ import {
   generateCarePlanBody,
   generateGoalBody,
   generateTaskBodies,
-} from 'src/utils/generateBodies';
+} from '../../utils/generateBodies';
 import type {
   CreateCarePlanRequest,
   CreateGoalRequest,
