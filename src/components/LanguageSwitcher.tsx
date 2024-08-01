@@ -77,7 +77,7 @@ const LanguageSwitcher = ({
   );
 };
 
-export default LanguageSwitcher;
+export { LanguageSwitcher };
 
 const useStyles = makeStyles((props: LanguageSwitcherProps) => ({
   itemContainer: {
