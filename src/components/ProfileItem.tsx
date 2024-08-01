@@ -14,7 +14,6 @@ export interface ProfileItemProps {
   handlePress: (item: ProfileMockDataItem) => void;
   item: ProfileMockDataItem;
   index: number;
-  iconStyle?: StyleProp<ViewStyle>;
   iconColor?: string;
   iconSize?: number;
   textStyle?: StyleProp<TextStyle>;
@@ -24,7 +23,6 @@ export interface ProfileItemProps {
     color?: string;
     icon?: IconTypes;
     size?: number;
-    style?: StyleProp<ViewStyle>;
   };
 }
 
@@ -32,7 +30,7 @@ const ProfileItem: React.FC<ProfileItemProps> = ({
   handlePress,
   item,
   index,
-  iconStyle,
+
   iconColor,
   iconSize = 24,
   textStyle,
@@ -71,7 +69,7 @@ const ProfileItem: React.FC<ProfileItemProps> = ({
       <Icon
         color={iconColor ?? theme.colors.black}
         icon={item.icon}
-        style={[styles.icon, iconStyle]}
+        style={[styles.icon]}
         size={iconSize}
       />
       <Text
@@ -81,7 +79,11 @@ const ProfileItem: React.FC<ProfileItemProps> = ({
       >
         {item.title}
       </Text>
-      <Icon {...mergedRightIconProps} />
+      <Icon
+        icon={mergedRightIconProps.icon}
+        color={mergedRightIconProps.color}
+        size={mergedRightIconProps.size}
+      />
     </TouchableOpacity>
   );
 };
