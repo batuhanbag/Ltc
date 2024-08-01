@@ -13,3 +13,4 @@ export * from './TaskCard';
 export * from './Calendar';
 export * from './ProfileSection';
 export * from './ProfileItem';
+export * from './LanguageSwitcher';
