@@ -11,7 +11,7 @@ import {
   scale,
   verticalScale,
   width,
-} from 'src/utils';
+} from '../utils';
 import { Icon, type IconTypes } from './Icon';
 import { Text, type Sizes } from './Text';
 
