@@ -9,6 +9,7 @@ import moment from 'moment';
 import { getTheme, makeStyles, moderateScale, verticalScale } from '../utils';
 import { Text } from './Text';
 import { Icon, type IconTypes } from './Icon';
+import { completedDate } from 'src/utils/taskCheckOperations';
 
 interface CalendarProps {
   day: {
@@ -17,6 +18,8 @@ interface CalendarProps {
     date: string;
   };
   index: number;
+  completedDates: { type: string; outputList: Set<string> }[];
+
   dayContainerStyle?: StyleProp<ViewStyle>;
   dayTextStyle?: StyleProp<TextStyle>;
   todayTextStyle?: StyleProp<TextStyle>;
@@ -33,15 +36,22 @@ interface CalendarProps {
   checkIconColor?: string;
   checkIconSize?: number;
   checkIconName?: IconTypes;
+  completedIconName: IconTypes;
+  failureIconName: IconTypes;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
   day,
   index,
   customDateCheck,
+  completedDates,
   ...props
 }) => {
   const styles = useStyles(props);
+
+  const completed = React.useMemo(() => {
+    return completedDate(completedDates, day.date);
+  }, [completedDates, day.date]);
 
   const dateStatus = customDateCheck
     ? customDateCheck(day.date)
@@ -67,7 +77,11 @@ const Calendar: React.FC<CalendarProps> = ({
     >
       <Text style={getTextStyle()} text={day.name} />
       <Icon
-        icon={props.checkIconName || 'noCalendarCheck'}
+        icon={
+          completed
+            ? props.completedIconName
+            : props.failureIconName || 'noCalendarCheck'
+        }
         size={props.checkIconSize || 24}
         color={props.checkIconColor || getTheme().colors.primary}
       />

@@ -14,6 +14,8 @@ import {
 } from '../utils';
 import { Icon, type IconTypes } from './Icon';
 import { Text, type Sizes } from './Text';
+import React from 'react';
+import { taskCompletedCheck } from 'src/utils/taskCheckOperations';
 
 export interface TaskDataProps {
   id: number;
@@ -28,6 +30,10 @@ interface TaskCardProps {
   onTaskPress: () => void;
   task: TaskDataProps;
   key: number;
+  completedDates: {
+    type: string;
+    outputList: Set<string>;
+  }[];
   cardBorderWidth?: number;
   cardBorderColor?: string;
   cardBorderRadius?: number;
@@ -39,10 +45,23 @@ interface TaskCardProps {
   taskIconStyle?: StyleProp<TextStyle>;
   taskIconSize?: number;
   taskIconColor?: string;
+  successIcon: IconTypes;
+  failureIcon: IconTypes;
+  circleIconSize?: number;
 }
 
-const TaskCard = ({ onTaskPress, task, key, ...props }: TaskCardProps) => {
+const TaskCard = ({
+  onTaskPress,
+  task,
+  key,
+  completedDates,
+  ...props
+}: TaskCardProps) => {
   const styles = useStyles(props);
+  const isSuccess = React.useMemo(() => {
+    return taskCompletedCheck(completedDates, task.type);
+  }, [completedDates, task]);
+
   return (
     <TouchableOpacity
       key={`${key}-task`}
@@ -57,6 +76,10 @@ const TaskCard = ({ onTaskPress, task, key, ...props }: TaskCardProps) => {
       />
       <View style={styles.taskDetail}>
         <Icon icon={task.icon as IconTypes} size={props.taskIconSize || 35} />
+        <Icon
+          icon={isSuccess ? props.successIcon : props.failureIcon}
+          size={props.circleIconSize || 24}
+        />
       </View>
     </TouchableOpacity>
   );
