@@ -9,7 +9,7 @@ import moment from 'moment';
 import { getTheme, makeStyles, moderateScale, verticalScale } from '../utils';
 import { Text } from './Text';
 import { Icon, type IconTypes } from './Icon';
-import { completedDate } from 'src/utils/taskCheckOperations';
+import { completedDate } from '../utils/taskCheckOperations';
 
 interface CalendarProps {
   day: {

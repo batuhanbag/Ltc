@@ -15,7 +15,7 @@ import {
 import { Icon, type IconTypes } from './Icon';
 import { Text, type Sizes } from './Text';
 import React from 'react';
-import { taskCompletedCheck } from 'src/utils/taskCheckOperations';
+import { taskCompletedCheck } from '../utils/taskCheckOperations';
 
 export interface TaskDataProps {
   id: number;
