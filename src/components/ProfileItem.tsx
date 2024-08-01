@@ -30,7 +30,6 @@ const ProfileItem: React.FC<ProfileItemProps> = ({
   handlePress,
   item,
   index,
-
   iconColor,
   iconSize = 24,
   textStyle,
@@ -56,12 +55,10 @@ const ProfileItem: React.FC<ProfileItemProps> = ({
       style={[
         styles.item,
         {
-          borderTopRightRadius: index === 0 ? moderateScale(16) : 0,
-          borderTopLeftRadius: index === 0 ? moderateScale(16) : 0,
-          borderBottomRightRadius:
-            index === item.items?.length - 1 ? moderateScale(16) : 0,
-          borderBottomLeftRadius:
-            index === item.items?.length - 1 ? moderateScale(16) : 0,
+          borderTopRightRadius: item.id === 1 ? moderateScale(16) : 0,
+          borderTopLeftRadius: item.id === 1 ? moderateScale(16) : 0,
+          borderBottomRightRadius: item.id === 4 ? moderateScale(16) : 0,
+          borderBottomLeftRadius: item.id === 4 ? moderateScale(16) : 0,
         },
         itemStyle,
       ]}
