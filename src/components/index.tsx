@@ -9,3 +9,4 @@ export * from './Header';
 export * from './AuthHeader';
 export * from './ChatListItem';
 export * from './AutoImage';
+export * from './TaskCard';
