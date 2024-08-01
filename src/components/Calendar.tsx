@@ -8,6 +8,7 @@ import {
 import moment from 'moment';
 import { getTheme, makeStyles, moderateScale, verticalScale } from '../utils';
 import { Text } from './Text';
+import { Icon, type IconTypes } from './Icon';
 
 interface CalendarProps {
   day: {
@@ -29,6 +30,9 @@ interface CalendarProps {
     isPast: boolean;
     isFuture: boolean;
   };
+  checkIconColor?: string;
+  checkIconSize?: number;
+  checkIconName?: IconTypes;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
@@ -62,6 +66,11 @@ const Calendar: React.FC<CalendarProps> = ({
       style={props.dayContainerStyle || styles.dayContainer}
     >
       <Text style={getTextStyle()} text={day.name} />
+      <Icon
+        icon={props.checkIconName || 'noCalendarCheck'}
+        size={props.checkIconSize || 24}
+        color={props.checkIconColor || getTheme().colors.primary}
+      />
     </View>
   );
 };
