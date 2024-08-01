@@ -71,7 +71,7 @@ const LanguageSwitcher = ({
       <Icon
         icon={item?.icon}
         size={props.iconSize || 24}
-        color={props.iconColor || getTheme().colors.black}
+        color={props.iconColor}
       />
     </TouchableOpacity>
   );
