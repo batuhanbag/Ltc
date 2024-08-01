@@ -10,6 +10,8 @@ import type {
   CreateTaskRequest,
   CreateTaskResponse,
   ITaskService,
+  TasksRequest,
+  TasksResponse,
 } from './interfaces';
 
 class TaskService implements ITaskService {
@@ -44,6 +46,16 @@ class TaskService implements ITaskService {
         body.tasks as CreateTaskResponse[],
         body.carePlanCategory
       )
+    );
+    return data;
+  }
+  public async getTasks({
+    userId,
+    category,
+    status,
+  }: TasksRequest): Promise<TasksResponse> {
+    const { data } = await axiosInstance.get(
+      `/task?owner=Patient/${userId}&patient=Patient/${userId}&category=${category}&status=${status}`
     );
     return data;
   }
