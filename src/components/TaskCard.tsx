@@ -62,7 +62,7 @@ const TaskCard = ({ onTaskPress, task, key, ...props }: TaskCardProps) => {
   );
 };
 
-export default TaskCard;
+export { TaskCard };
 
 const useStyles = makeStyles((props: TaskCardProps) => ({
   taskCard: {
