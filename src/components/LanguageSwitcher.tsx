@@ -55,22 +55,22 @@ const LanguageSwitcher = ({
       <View style={styles.itemDetail}>
         <Icon
           icon={
-            selectedLanguage === item.value
+            selectedLanguage === item?.value
               ? selectedLanguageIcon
               : nonSelectedLanguageIcon
           }
           size={props.iconSize || 24}
         />
         <Text
-          text={item.title}
+          text={item?.title}
           color={getTheme().colors.black}
           size={props.textSize ?? 'sm'}
           style={props.textStyle}
         />
       </View>
       <Icon
-        icon={item.icon}
-        size={24}
+        icon={item?.icon}
+        size={props.iconSize || 24}
         color={props.iconColor || getTheme().colors.black}
       />
     </TouchableOpacity>
@@ -90,7 +90,7 @@ const useStyles = makeStyles((props: LanguageSwitcherProps) => ({
     marginTop: verticalScale(10),
     borderWidth: 2,
     borderColor:
-      props.selectedLanguage === props.item.value
+      props?.selectedLanguage === props?.item?.value
         ? getTheme().colors.primary
         : getTheme().colors.white,
   },
