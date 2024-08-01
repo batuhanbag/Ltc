@@ -11,3 +11,5 @@ export * from './ChatListItem';
 export * from './AutoImage';
 export * from './TaskCard';
 export * from './Calendar';
+export * from './ProfileSection';
+export * from './ProfileItem';
