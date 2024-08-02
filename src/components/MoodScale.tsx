@@ -61,7 +61,7 @@ const MoodScale: React.FC<MoodScaleProps> = ({
         ]}
       />
       <Slider
-        style={{ width: 200, height: 40 }}
+        style={[styles.slider, customStyles.slider]}
         minimumValue={min}
         maximumValue={max}
         minimumTrackTintColor={mergedTheme.minimumTrackTintColor}
