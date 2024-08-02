@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, type ViewStyle } from 'react-native';
 import { Icon, type IconTypes } from './Icon';
-import { getTheme, moderateScale } from 'src/utils';
+import { getTheme, moderateScale } from '../utils';
 import { Text } from './Text';
 
 interface BreathingSettingsCardProps {
