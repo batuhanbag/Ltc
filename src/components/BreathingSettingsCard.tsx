@@ -49,6 +49,7 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
       <TouchableOpacity
         onPress={leftIconPress}
         style={[styles.settingsButtonContainer, buttonContainerStyle]}
+        disabled={value <= minValue}
       >
         <Icon
           icon={leftIcon}
