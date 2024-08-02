@@ -12601,7 +12601,7 @@ __metadata:
     react-native: 0.74.3
     react-native-awesome-slider: ^2.5.3
     react-native-builder-bob: ^0.28.1
-    react-native-reanimated: ^3.14.0
+    react-native-reanimated: ^3.11.0
     react-native-safe-area-context: ^4.10.8
     release-it: ^15.0.0
     typescript: ^5.2.2
@@ -12611,7 +12611,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-reanimated@npm:^3.14.0":
+"react-native-reanimated@npm:^3.11.0":
   version: 3.14.0
   resolution: "react-native-reanimated@npm:3.14.0"
   dependencies:
