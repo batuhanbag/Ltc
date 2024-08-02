@@ -14,3 +14,8 @@ export * from './Calendar';
 export * from './ProfileSection';
 export * from './ProfileItem';
 export * from './LanguageSwitcher';
+export * from './BreathingHeader';
+export * from './NestedCircle';
+export * from './GenericText';
+export * from './StepControlCard';
+export * from './BreathingSettingsCard';
