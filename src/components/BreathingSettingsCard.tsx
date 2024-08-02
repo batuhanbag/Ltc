@@ -17,6 +17,8 @@ interface BreathingSettingsCardProps {
   buttonContainerStyle?: ViewStyle;
   minValue?: number;
   maxValue?: number;
+  leftIconPress?: () => void;
+  rightIconPress?: () => void;
 }
 
 const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
@@ -32,6 +34,8 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
   buttonContainerStyle,
   minValue = 1,
   maxValue = Infinity,
+  leftIconPress,
+  rightIconPress,
 }) => {
   const styles = createStyles(backgroundColor);
 
@@ -42,6 +46,7 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
           icon={leftIcon}
           size={iconSize}
           color={value <= minValue ? getTheme().colors.gray : undefined}
+          onPress={leftIconPress}
         />
       </View>
       <View style={[styles.valueContainer, valueContainerStyle]}>
@@ -63,6 +68,7 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
           icon={rightIcon}
           size={iconSize}
           color={value >= maxValue ? getTheme().colors.gray : undefined}
+          onPress={rightIconPress}
         />
       </View>
     </View>
