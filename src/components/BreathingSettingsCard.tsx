@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  type ViewStyle,
+} from 'react-native';
 import { Icon, type IconTypes } from './Icon';
 import { getTheme, moderateScale } from '../utils';
 import { Text } from './Text';
@@ -41,14 +46,17 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
 
   return (
     <View style={[styles.settingsContainer, containerStyle]}>
-      <View style={[styles.settingsButtonContainer, buttonContainerStyle]}>
+      <TouchableOpacity
+        onPress={leftIconPress}
+        style={[styles.settingsButtonContainer, buttonContainerStyle]}
+      >
         <Icon
           icon={leftIcon}
           size={iconSize}
           color={value <= minValue ? getTheme().colors.gray : undefined}
           onPress={leftIconPress}
         />
-      </View>
+      </TouchableOpacity>
       <View style={[styles.valueContainer, valueContainerStyle]}>
         <Text
           text={value.toString()}
@@ -63,14 +71,17 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
           style={breathsTextStyle}
         />
       </View>
-      <View style={[styles.settingsButtonContainer, buttonContainerStyle]}>
+      <TouchableOpacity
+        onPress={rightIconPress}
+        style={[styles.settingsButtonContainer, buttonContainerStyle]}
+      >
         <Icon
           icon={rightIcon}
           size={iconSize}
           color={value >= maxValue ? getTheme().colors.gray : undefined}
           onPress={rightIconPress}
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
