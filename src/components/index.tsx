@@ -21,3 +21,4 @@ export * from './StepControlCard';
 export * from './BreathingSettingsCard';
 export * from './MoodScale';
 export * from './FeelingChip';
+export * from './FeelingsNote';
