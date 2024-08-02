@@ -7,14 +7,10 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { Slider } from 'react-native-awesome-slider';
-import { useSharedValue } from 'react-native-reanimated';
 
 interface MoodScaleProps {
-  value: number;
   setValue: (value: number) => void;
   image: string;
-  minValue?: number;
-  maxValue?: number;
   sliderWidth?: number;
   sliderHeight?: number;
   imageSize?: { width: number; height: number };
@@ -30,25 +26,25 @@ interface MoodScaleProps {
     cacheTrackTintColor?: string;
   };
   renderCustomThumb?: () => React.ReactNode;
+  progress?: number;
+  min?: number;
+  max?: number;
 }
 
 const MoodScale: React.FC<MoodScaleProps> = ({
-  value,
   setValue,
   image,
-  minValue = -1,
-  maxValue = 1,
+
   sliderWidth = 300,
   sliderHeight = 50,
   imageSize = { width: 150, height: 150 },
   customStyles = {},
   sliderTheme = {},
   renderCustomThumb,
+  progress,
+  min,
+  max,
 }) => {
-  const progress = useSharedValue(value);
-  const min = useSharedValue(minValue);
-  const max = useSharedValue(maxValue);
-
   const defaultTheme = {
     disableMinTrackTintColor: 'red',
     maximumTrackTintColor: 'green',
