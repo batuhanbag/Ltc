@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import React from 'react';
+
 import { Text } from './Text';
 import { TextInput } from './TextInput';
 import { verticalScale } from '../utils';
