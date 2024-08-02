@@ -5,6 +5,7 @@ export interface ITaskService {
   ) => Promise<CreateTaskResponse[]>;
   readonly createCarePlan: (body: any) => Promise<any>;
   readonly getTasks: (body: TasksRequest) => Promise<TasksResponse>;
+  readonly updateTask: (body: any) => Promise<UpdateTaskResponse>;
 }
 
 export interface CreateGoalResponse {

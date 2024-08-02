@@ -59,6 +59,10 @@ class TaskService implements ITaskService {
     );
     return data;
   }
+  public async updateTask(body: any): Promise<any> {
+    const { data } = await axiosInstance.put(`/task/${body?.id}`, body);
+    return data;
+  }
 }
 
 const task = new TaskService();
