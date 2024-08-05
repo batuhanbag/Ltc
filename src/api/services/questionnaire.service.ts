@@ -27,7 +27,7 @@ class QuestionnaireServices implements IQuestionnaireService {
 
   async updateQuestionnaireResponse(request: any): Promise<any> {
     const { data } = await axiosInstance.put(
-      `/questionnaire-response/${request.id}`,
+      `/questionnaire-response/${request.questionnaire}`,
       request
     );
     return data;
