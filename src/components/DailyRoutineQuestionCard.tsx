@@ -3,11 +3,13 @@ import { AnswerDetail } from '.';
 interface DailyRoutineQuestionCardProps {
   index: number;
   item: any | undefined;
+  onAnswerPress: () => void;
 }
 
 const DailyRoutineQuestionCard = ({
   index,
   item,
+  onAnswerPress,
 }: DailyRoutineQuestionCardProps) => {
   return (
     <View style={styles.card} key={`${index}-question`}>
@@ -17,7 +19,13 @@ const DailyRoutineQuestionCard = ({
         keyExtractor={(index) => `${index}-answer-detail`}
         // eslint-disable-next-line @typescript-eslint/no-shadow
         renderItem={({ item, index }) => {
-          return <AnswerDetail item={item} index={index} />;
+          return (
+            <AnswerDetail
+              item={item}
+              index={index}
+              onAnswerPress={onAnswerPress}
+            />
+          );
         }}
       />
     </View>

@@ -8,8 +8,8 @@ import { truncateText } from '../utils/truncateText';
 interface AnswerDetailProps {
   item: any | undefined;
   index: number;
-  navigation?: any;
-  onAnswerPress?: () => void;
+
+  onAnswerPress: () => void;
 }
 
 const AnswerDetail = ({ index, item, onAnswerPress }: AnswerDetailProps) => {
