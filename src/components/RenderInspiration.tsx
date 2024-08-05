@@ -11,7 +11,7 @@ import { scale, width } from '../utils';
 
 interface RenderInspirationProps {
   index: number;
-  containerStyle: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
   onPress: () => void;
   uri: string;
   text: string;
