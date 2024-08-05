@@ -6,7 +6,6 @@ import {
   type TextStyle,
   type ViewStyle,
 } from 'react-native';
-import React from 'react';
 import { Text } from './Text';
 import { scale, width } from '../utils';
 
