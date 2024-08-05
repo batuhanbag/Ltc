@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Text } from '.';
 import moment from 'moment';
-import { getTheme, moderateScale, scale, verticalScale } from 'src/utils';
+import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { truncateText } from '../utils/truncateText';
 
 interface AnswerDetailProps {

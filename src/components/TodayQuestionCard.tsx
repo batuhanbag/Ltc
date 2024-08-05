@@ -6,7 +6,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { Icon, Text } from '.';
-import { getTheme, moderateScale, verticalScale } from 'src/utils';
+import { getTheme, moderateScale, verticalScale } from '../utils';
 
 interface TodayQuestionCardProps {
   randomQuestion: {
