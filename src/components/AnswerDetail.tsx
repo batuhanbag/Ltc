@@ -8,7 +8,6 @@ import { truncateText } from '../utils/truncateText';
 interface AnswerDetailProps {
   item: any | undefined;
   index: number;
-
   onAnswerPress: () => void;
 }
 
