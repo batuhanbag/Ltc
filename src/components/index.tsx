@@ -29,3 +29,4 @@ export * from './ChatFooter';
 export * from './ChatHeader';
 export * from './ChatSendButton';
 export * from './ChatTime';
+export * from './RenderInspiration';
