@@ -30,3 +30,6 @@ export * from './ChatHeader';
 export * from './ChatSendButton';
 export * from './ChatTime';
 export * from './RenderInspiration';
+export * from './AnswerDetail';
+export * from './DailyRoutineQuestionCard';
+export * from './TodayQuestionCard';
