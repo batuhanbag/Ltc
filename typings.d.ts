@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 
 declare global {
   var axiosInstance: AxiosInstance;
+  var openaiValues: OpenaiValues;
 }
 
 export interface ThemeConfig {
@@ -25,4 +26,11 @@ export interface ThemeConfig {
     tertiary: string;
     disabled: string;
   };
+}
+
+export interface OpenaiValues {
+  max_tokens: number;
+  min_tokens: number;
+  model: string;
+  api_key: string;
 }

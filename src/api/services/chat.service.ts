@@ -1,4 +1,5 @@
 import type {
+  ChatHistoryBody,
   ChatHistoryRequest,
   ChatHistoryResponse,
   IChatService,
@@ -13,6 +14,19 @@ class ChatService implements IChatService {
     );
     return data;
   }
+
+  public createChatHistory = async (body: ChatHistoryBody): Promise<any> => {
+    const { data } = await axiosInstance.post('/communication', body);
+    return data;
+  };
+
+  public updateChatHistory = async (
+    id: string,
+    body: ChatHistoryBody
+  ): Promise<any> => {
+    const { data } = await axiosInstance.put(`/communication/${id}`, body);
+    return data;
+  };
 }
 
 const chat = new ChatService();

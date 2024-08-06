@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import type { ThemeConfig } from '../../typings';
+import type { OpenaiValues, ThemeConfig } from '../../typings';
 
 export type Client = AxiosInstance;
 export type ClientRequest = Client['request'];
@@ -42,6 +42,10 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
   global.axiosInstance = axiosInstance;
 }
 
+function initOpenaiValues(openaiValues: OpenaiValues) {
+  global.openaiValues = openaiValues;
+}
+
 function initTheme(config: Partial<ThemeConfig>) {
   currentTheme = { ...defaultTheme, ...config };
 }
@@ -50,4 +54,4 @@ const getTheme = (): ThemeConfig => {
   return currentTheme;
 };
 
-export { initAxiosInstance, initTheme, getTheme };
+export { initAxiosInstance, initTheme, getTheme, initOpenaiValues };
