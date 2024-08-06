@@ -1,3 +1,5 @@
+import type { TasksIdentifier } from 'src/utils/task';
+
 export interface ITaskService {
   readonly createGoal: (body: CreateGoalRequest) => Promise<CreateGoalResponse>;
   readonly createTasks: (
@@ -132,4 +134,10 @@ export interface CreateCarePlanRequest {
   goalIds: string;
   tasks: CreateTaskResponse[];
   carePlanCategory: string;
+}
+
+export interface updateTaskRequest {
+  task: any;
+  id: string;
+  identifier: TasksIdentifier;
 }

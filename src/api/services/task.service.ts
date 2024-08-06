@@ -1,4 +1,8 @@
 import {
+  filterTasksByIdentifier,
+  generateUpdateTaskBody,
+} from 'src/utils/task';
+import {
   generateCarePlanBody,
   generateGoalBody,
   generateTaskBodies,
@@ -12,6 +16,7 @@ import type {
   ITaskService,
   TasksRequest,
   TasksResponse,
+  updateTaskRequest,
 } from './interfaces';
 
 class TaskService implements ITaskService {
@@ -59,8 +64,13 @@ class TaskService implements ITaskService {
     );
     return data;
   }
-  public async updateTask(body: any): Promise<any> {
-    const { data } = await axiosInstance.put(`/task/${body?.id}`, body);
+  public async updateTask(body: updateTaskRequest): Promise<any> {
+    const filterTask = filterTasksByIdentifier(body.task, body.identifier);
+    const reqBody = generateUpdateTaskBody({
+      task: filterTask[0],
+      type: body.identifier,
+    });
+    const { data } = await axiosInstance.put(`/task/${body?.id}`, reqBody);
     return data;
   }
 }
