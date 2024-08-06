@@ -39,7 +39,8 @@
     "clean": "del-cli lib",
     "prepare": "bob build",
     "release": "release-it",
-    "upload": "yarn clean && yarn prepare && yarn release"
+    "upload": "yarn clean && yarn prepare && yarn release",
+    "commit-and-release": "node commit-and-release.js"
   },
   "keywords": [
     "react-native",
