@@ -54,4 +54,14 @@ const getTheme = (): ThemeConfig => {
   return currentTheme;
 };
 
-export { initAxiosInstance, initTheme, getTheme, initOpenaiValues };
+const getOpenAIValues = (): OpenaiValues => {
+  return global.openaiValues;
+};
+
+export {
+  initAxiosInstance,
+  initTheme,
+  getTheme,
+  initOpenaiValues,
+  getOpenAIValues,
+};
