@@ -70,7 +70,7 @@ class TaskService implements ITaskService {
       task: filterTask[0],
       type: body.identifier,
     });
-    const { data } = await axiosInstance.put(`/task/${body?.id}`, reqBody);
+    const { data } = await axiosInstance.put(`/task/${reqBody.id}`, reqBody);
     return data;
   }
 }

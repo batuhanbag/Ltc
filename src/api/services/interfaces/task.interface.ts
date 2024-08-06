@@ -138,6 +138,5 @@ export interface CreateCarePlanRequest {
 
 export interface updateTaskRequest {
   task: any;
-  id: string;
   identifier: TasksIdentifier;
 }
