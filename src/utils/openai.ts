@@ -6,7 +6,7 @@ console.log('openaiValues', {
   global: global.openaiValues,
   fc: getOpenAIValues(),
 });
-const openaiValues = global.openaiValues || getOpenAIValues();
+const openaiValues = getOpenAIValues();
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
