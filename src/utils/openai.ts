@@ -1,12 +1,8 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import { getOpenAIValues } from './init';
+import { getLocalOpenAIValues } from './init';
 
-console.log('openaiValues', {
-  global: global.openaiValues,
-  fc: getOpenAIValues(),
-});
-const openaiValues = getOpenAIValues();
+const openaiValues = getLocalOpenAIValues();
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
