@@ -5,10 +5,10 @@ interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-const OPEN_AI_API_KEY = openaiValues?.api_key;
-const GPT_MODEL = openaiValues?.model;
-const MAX_TOKEN = openaiValues?.max_tokens;
-const MIN_TOKEN: number = openaiValues?.min_tokens;
+const OPEN_AI_API_KEY = openaiValues?.api_key || '';
+const GPT_MODEL = openaiValues?.model || '';
+const MAX_TOKEN = openaiValues?.max_tokens || '';
+const MIN_TOKEN = openaiValues?.min_tokens || '';
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 
