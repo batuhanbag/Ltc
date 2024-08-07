@@ -1,14 +1,17 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
+import { getOpenAIValues } from './init';
+
+const { max_tokens, min_tokens, model, api_key } = getOpenAIValues();
 
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-const OPEN_AI_API_KEY = openaiValues?.api_key || '';
-const GPT_MODEL = openaiValues?.model || '';
-const MAX_TOKEN = openaiValues?.max_tokens || '';
-const MIN_TOKEN = openaiValues?.min_tokens || '';
+const OPEN_AI_API_KEY = api_key || '';
+const GPT_MODEL = model || '';
+const MAX_TOKEN = max_tokens || '';
+const MIN_TOKEN = min_tokens || '';
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 
@@ -31,7 +34,7 @@ export async function makeGPTRequest(
   userPrompt: string,
   systemPrompt: string
 ): Promise<AxiosResponse<any>> {
-  if (openaiValues.api_key === undefined) {
+  if (OPEN_AI_API_KEY === undefined) {
     throw new Error('OpenAI API key is not set');
   }
   const response = await gptAxios.post(
