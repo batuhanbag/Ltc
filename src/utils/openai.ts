@@ -2,6 +2,10 @@ import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import { getOpenAIValues } from './init';
 
+console.log('openaiValues', {
+  global: global.openaiValues,
+  fc: getOpenAIValues(),
+});
 const openaiValues = global.openaiValues || getOpenAIValues();
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
