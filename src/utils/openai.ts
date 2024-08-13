@@ -7,10 +7,10 @@ interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-const OPEN_AI_API_KEY = openaiValuesObj?.api_key || openaiValues?.api_key || '';
-const GPT_MODEL = openaiValuesObj?.model || openaiValues?.model || '';
-const MAX_TOKEN = openaiValuesObj?.max_tokens || openaiValues?.max_tokens || '';
-const MIN_TOKEN = openaiValuesObj?.min_tokens || openaiValues?.min_tokens || '';
+const OPEN_AI_API_KEY = openaiValuesObj?.api_key || '';
+const GPT_MODEL = openaiValuesObj?.model || '';
+const MAX_TOKEN = openaiValuesObj?.max_tokens || '';
+const MIN_TOKEN = openaiValuesObj?.min_tokens || '';
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 
