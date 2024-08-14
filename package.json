@@ -180,7 +180,7 @@
     "version": "0.39.0"
   },
   "dependencies": {
-    "@react-native-community/slider": "^4.5.2",
+    "@react-native-community/slider": "^4.4.3",
     "axios": "^1.7.2",
     "moment": "^2.30.1",
     "react-native-gifted-chat": "^2.4.0",
