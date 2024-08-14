@@ -6,7 +6,6 @@ import {
   type ImageStyle,
   type ViewStyle,
 } from 'react-native';
-import Slider from '@react-native-community/slider';
 interface MoodScaleProps {
   value: number;
   setValue: (value: number) => void;
@@ -29,27 +28,15 @@ interface MoodScaleProps {
   progress?: number;
   min?: number;
   max?: number;
+  sliderComponent: React.ReactNode;
 }
 
 const MoodScale: React.FC<MoodScaleProps> = ({
-  value,
-  setValue,
   image,
   imageSize = { width: 150, height: 150 },
   customStyles = {},
-  sliderTheme = {},
-  min,
-  max,
+  sliderComponent,
 }) => {
-  const defaultTheme = {
-    disableMinTrackTintColor: 'red',
-    maximumTrackTintColor: 'green',
-    minimumTrackTintColor: '#8C8AFF',
-    cacheTrackTintColor: 'black',
-  };
-
-  const mergedTheme = { ...defaultTheme, ...sliderTheme };
-
   return (
     <View style={[styles.body, customStyles.container]}>
       <Image
@@ -60,15 +47,7 @@ const MoodScale: React.FC<MoodScaleProps> = ({
           customStyles.image,
         ]}
       />
-      <Slider
-        style={[styles.slider, customStyles.slider]}
-        minimumValue={min}
-        maximumValue={max}
-        minimumTrackTintColor={mergedTheme.minimumTrackTintColor}
-        maximumTrackTintColor={mergedTheme.maximumTrackTintColor}
-        onValueChange={(value) => setValue(value)}
-        value={value}
-      />
+      {sliderComponent}
     </View>
   );
 };
