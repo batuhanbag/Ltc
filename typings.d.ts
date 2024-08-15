@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 
-declare global {
+export declare global {
   var axiosInstance: AxiosInstance;
   var openaiValues: OpenaiValues;
 }
@@ -36,3 +36,5 @@ export interface OpenaiValues {
   model: string;
   api_key: string;
 }
+
+module.exports = { openaiValues };

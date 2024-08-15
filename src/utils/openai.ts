@@ -31,10 +31,11 @@ export async function makeGPTRequest(
   userPrompt: string,
   systemPrompt: string
 ): Promise<AxiosResponse<any>> {
+  console.log(openaiValues, 'exportedValuesexportedValuesexportedValues');
   const openAIConfig = OpenAIConfig.getInstance();
-  const openaiValues = openAIConfig.getValues();
+  const openaiValues2 = openAIConfig.getValues();
   const { api_key, min_tokens, max_tokens, model } =
-    openaiValues as OpenaiValues;
+    openaiValues2 as OpenaiValues;
 
   if (api_key === undefined) {
     throw new Error('OpenAI API key is not set');
