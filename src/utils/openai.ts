@@ -1,6 +1,5 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import { OpenAIConfig } from './openAIConfig';
 import type { OpenaiValues } from 'typings';
 
 interface GPTResponse {
@@ -31,11 +30,8 @@ export async function makeGPTRequest(
   userPrompt: string,
   systemPrompt: string
 ): Promise<AxiosResponse<any>> {
-  console.log(openaiValues, 'exportedValuesexportedValuesexportedValues');
-  const openAIConfig = OpenAIConfig.getInstance();
-  const openaiValues2 = openAIConfig.getValues();
   const { api_key, min_tokens, max_tokens, model } =
-    openaiValues2 as OpenaiValues;
+    openaiValues as OpenaiValues;
 
   if (api_key === undefined) {
     throw new Error('OpenAI API key is not set');
