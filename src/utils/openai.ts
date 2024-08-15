@@ -1,40 +1,23 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import { OpenAIConfig } from './openAIConfig';
+import type { OpenaiValues } from 'typings';
 
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-const useOpenAIConfig = () => {
-  const openAIConfig = OpenAIConfig.getInstance();
-  const openaiValues = openAIConfig.getValues();
-
-  const OPEN_AI_API_KEY = openaiValues?.api_key || '';
-  const GPT_MODEL = openaiValues?.model || '';
-  const MAX_TOKEN = openaiValues?.max_tokens || 0;
-  const MIN_TOKEN = openaiValues?.min_tokens || 0;
-
-  return { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN };
-};
-
-const { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN } = useOpenAIConfig();
-
-console.log(
-  { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN },
-  '{ OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN }'
-);
-
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 
-const gptAxios = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${OPEN_AI_API_KEY}`,
-  },
-});
+const gptAxios = (OPEN_AI_API_KEY: string) => {
+  return axios.create({
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${OPEN_AI_API_KEY}`,
+    },
+  });
+};
 
 export function getAIResponse(response: {
   choices?: [{ message: { content: string } }];
@@ -48,19 +31,24 @@ export async function makeGPTRequest(
   userPrompt: string,
   systemPrompt: string
 ): Promise<AxiosResponse<any>> {
-  if (OPEN_AI_API_KEY === undefined) {
+  const openAIConfig = OpenAIConfig.getInstance();
+  const openaiValues = openAIConfig.getValues();
+  const { api_key, min_tokens, max_tokens, model } =
+    openaiValues as OpenaiValues;
+
+  if (api_key === undefined) {
     throw new Error('OpenAI API key is not set');
   }
-  const response = await gptAxios.post(
+  const response = await gptAxios(api_key).post(
     OPEN_AI_CHAT_COMPLETION_URL,
     JSON.stringify({
-      model: GPT_MODEL,
+      model,
       messages: [
         generateSystemPrompt(systemPrompt),
         { role: 'user', content: userPrompt },
       ],
-      max_tokens: MAX_TOKEN,
-      min_tokens: MIN_TOKEN,
+      max_tokens: min_tokens,
+      min_tokens: max_tokens,
     })
   );
   return response.data;
