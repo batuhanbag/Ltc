@@ -1,9 +1,15 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
+import { getOpenAIValues, getOpenAIValues2, getOpenAIValues3 } from './init';
 
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
+
+console.log(global?.openaiValues, 'global?.openaiValuesglobal?.openaiValues');
+console.log(getOpenAIValues(), 'getOpenAIValues()getOpenAIValues()');
+console.log(getOpenAIValues2(), 'getOpenAIValues2()getOpenAIValues2()');
+console.log(getOpenAIValues3(), 'getOpenAIValues3()getOpenAIValues3()');
 
 const OPEN_AI_API_KEY = global?.openaiValues?.api_key || '';
 const GPT_MODEL = global?.openaiValues?.model || '';

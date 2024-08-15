@@ -28,6 +28,7 @@ const defaultTheme: ThemeConfig = {
 };
 
 let currentTheme: ThemeConfig = defaultTheme;
+let localOpenaiValues: OpenaiValues;
 
 /**
  * @description
@@ -44,6 +45,7 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
 
 function initOpenaiValues(openaiValues: OpenaiValues) {
   global.openaiValues = openaiValues;
+  localOpenaiValues = openaiValues;
 }
 
 function initTheme(config: Partial<ThemeConfig>) {
@@ -57,6 +59,13 @@ const getTheme = (): ThemeConfig => {
 const getOpenAIValues = (): OpenaiValues => {
   return global.openaiValues;
 };
+const getOpenAIValues2 = (): OpenaiValues => {
+  return openaiValues;
+};
+
+const getOpenAIValues3 = (): OpenaiValues => {
+  return localOpenaiValues;
+};
 
 export {
   initAxiosInstance,
@@ -64,4 +73,6 @@ export {
   getTheme,
   initOpenaiValues,
   getOpenAIValues,
+  getOpenAIValues2,
+  getOpenAIValues3,
 };
