@@ -1,19 +1,31 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import { getOpenAIValues, getOpenAIValues3 } from './init';
 
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-console.log(global?.openaiValues, 'global?.openaiValuesglobal?.openaiValues');
-console.log(getOpenAIValues(), 'getOpenAIValues()getOpenAIValues()');
-console.log(getOpenAIValues3(), 'getOpenAIValues3()getOpenAIValues3()');
+function useOpenAIConfig() {
+  const OPEN_AI_API_KEY = globalThis.openaiValues?.api_key || '';
+  const GPT_MODEL = globalThis.openaiValues?.model || '';
+  const MAX_TOKEN = globalThis.openaiValues?.max_tokens || 0;
+  const MIN_TOKEN = globalThis.openaiValues?.min_tokens || 0;
 
-const OPEN_AI_API_KEY = global?.openaiValues?.api_key || '';
-const GPT_MODEL = global?.openaiValues?.model || '';
-const MAX_TOKEN = global?.openaiValues?.max_tokens || '';
-const MIN_TOKEN = global?.openaiValues?.min_tokens || '';
+  if (!globalThis.openaiValues) {
+    console.warn('OpenAI values are not initialized.');
+  }
+
+  return { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN };
+}
+
+const { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN } = useOpenAIConfig();
+
+console.log(
+  { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN },
+  '{ OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN }'
+);
+
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 

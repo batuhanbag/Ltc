@@ -5,6 +5,8 @@ declare global {
   var openaiValues: OpenaiValues;
 }
 
+globalThis.openaiValues = globalThis.openaiValues || undefined;
+
 export interface ThemeConfig {
   colors: {
     primary: string;

@@ -44,7 +44,7 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
 }
 
 function initOpenaiValues(openaiValues: OpenaiValues) {
-  global.openaiValues = openaiValues;
+  globalThis.openaiValues = openaiValues;
   localOpenaiValues = openaiValues;
 }
 
