@@ -30,8 +30,7 @@ export async function makeGPTRequest(
   userPrompt: string,
   systemPrompt: string
 ): Promise<AxiosResponse<any>> {
-  const { api_key, min_tokens, max_tokens, model } =
-    openaiValues as OpenaiValues;
+  const { api_key, max_tokens, model } = openaiValues as OpenaiValues;
 
   if (api_key === undefined) {
     throw new Error('OpenAI API key is not set');
@@ -44,8 +43,7 @@ export async function makeGPTRequest(
         generateSystemPrompt(systemPrompt),
         { role: 'user', content: userPrompt },
       ],
-      max_tokens: min_tokens,
-      min_tokens: max_tokens,
+      max_tokens,
     })
   );
   return response.data;
