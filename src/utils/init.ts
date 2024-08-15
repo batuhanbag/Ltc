@@ -59,9 +59,6 @@ const getTheme = (): ThemeConfig => {
 const getOpenAIValues = (): OpenaiValues => {
   return global.openaiValues;
 };
-const getOpenAIValues2 = (): OpenaiValues => {
-  return openaiValues;
-};
 
 const getOpenAIValues3 = (): OpenaiValues => {
   return localOpenaiValues;
@@ -73,6 +70,5 @@ export {
   getTheme,
   initOpenaiValues,
   getOpenAIValues,
-  getOpenAIValues2,
   getOpenAIValues3,
 };
