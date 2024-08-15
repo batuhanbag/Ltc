@@ -29,8 +29,6 @@ const defaultTheme: ThemeConfig = {
 
 let currentTheme: ThemeConfig = defaultTheme;
 
-let localOpenaiValues: OpenaiValues | null = null;
-
 /**
  * @description
  * Initializes axios instance to be used in the apis.
@@ -46,7 +44,6 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
 
 function initOpenaiValues(openaiValues: OpenaiValues) {
   global.openaiValues = openaiValues;
-  localOpenaiValues = openaiValues;
 }
 
 function initTheme(config: Partial<ThemeConfig>) {
@@ -61,15 +58,10 @@ const getOpenAIValues = (): OpenaiValues => {
   return global.openaiValues;
 };
 
-const getLocalOpenAIValues = (): OpenaiValues => {
-  return localOpenaiValues as OpenaiValues;
-};
-
 export {
   initAxiosInstance,
   initTheme,
   getTheme,
   initOpenaiValues,
-  getLocalOpenAIValues,
   getOpenAIValues,
 };

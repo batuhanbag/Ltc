@@ -1,16 +1,14 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import { getLocalOpenAIValues } from './init';
 
-const openaiValuesObj = getLocalOpenAIValues();
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-const OPEN_AI_API_KEY = openaiValuesObj?.api_key || '';
-const GPT_MODEL = openaiValuesObj?.model || '';
-const MAX_TOKEN = openaiValuesObj?.max_tokens || '';
-const MIN_TOKEN = openaiValuesObj?.min_tokens || '';
+const OPEN_AI_API_KEY = global?.openaiValues?.api_key || '';
+const GPT_MODEL = global?.openaiValues?.model || '';
+const MAX_TOKEN = global?.openaiValues?.max_tokens || '';
+const MIN_TOKEN = global?.openaiValues?.min_tokens || '';
 const OPEN_AI_CHAT_COMPLETION_URL =
   'https://api.openai.com/v1/chat/completions';
 
