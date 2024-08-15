@@ -1,23 +1,23 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
+import { OpenAIConfig } from './openAIConfig';
 
 interface GPTResponse {
   choices?: [{ message: { content: string } }] | undefined;
 }
 
-function useOpenAIConfig() {
-  const OPEN_AI_API_KEY = globalThis.openaiValues?.api_key || '';
-  const GPT_MODEL = globalThis.openaiValues?.model || '';
-  const MAX_TOKEN = globalThis.openaiValues?.max_tokens || 0;
-  const MIN_TOKEN = globalThis.openaiValues?.min_tokens || 0;
+const useOpenAIConfig = () => {
+  const openAIConfig = OpenAIConfig.getInstance();
+  const openaiValues = openAIConfig.getValues();
 
-  if (!globalThis.openaiValues) {
-    console.warn('OpenAI values are not initialized.');
-  }
+  const OPEN_AI_API_KEY = openaiValues?.api_key || '';
+  const GPT_MODEL = openaiValues?.model || '';
+  const MAX_TOKEN = openaiValues?.max_tokens || 0;
+  const MIN_TOKEN = openaiValues?.min_tokens || 0;
 
   return { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN };
-}
+};
 
 const { OPEN_AI_API_KEY, GPT_MODEL, MAX_TOKEN, MIN_TOKEN } = useOpenAIConfig();
 
