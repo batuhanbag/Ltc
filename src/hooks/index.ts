@@ -1,2 +1,2 @@
 export * from './useKeyboardListener';
-export * from './useSafeAreaInsetsStyle';
+export * from './useSocialLogin';
