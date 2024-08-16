@@ -32,3 +32,5 @@ export * from './RenderInspiration';
 export * from './AnswerDetail';
 export * from './DailyRoutineQuestionCard';
 export * from './TodayQuestionCard';
+export * from './SocialButton';
+export * from './AuthSocialButtons';
