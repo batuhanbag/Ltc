@@ -28,8 +28,7 @@ const defaultTheme: ThemeConfig = {
 };
 
 let currentTheme: ThemeConfig = defaultTheme;
-
-let localOpenaiValues: OpenaiValues | null = null;
+let localOpenaiValues: OpenaiValues;
 
 /**
  * @description
@@ -45,7 +44,7 @@ function initAxiosInstance(axiosInstance: AxiosInstance) {
 }
 
 function initOpenaiValues(openaiValues: OpenaiValues) {
-  global.openaiValues = openaiValues;
+  globalThis.openaiValues = openaiValues;
   localOpenaiValues = openaiValues;
 }
 
@@ -61,8 +60,8 @@ const getOpenAIValues = (): OpenaiValues => {
   return global.openaiValues;
 };
 
-const getLocalOpenAIValues = (): OpenaiValues => {
-  return localOpenaiValues as OpenaiValues;
+const getOpenAIValues3 = (): OpenaiValues => {
+  return localOpenaiValues;
 };
 
 export {
@@ -70,6 +69,6 @@ export {
   initTheme,
   getTheme,
   initOpenaiValues,
-  getLocalOpenAIValues,
   getOpenAIValues,
+  getOpenAIValues3,
 };
