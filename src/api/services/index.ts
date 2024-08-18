@@ -5,3 +5,4 @@ export * from './chat.service';
 export * from './observation.service';
 export * from './profile.service';
 export * from './questionnaire.service';
+export * from './content.service';
