@@ -1,5 +1,4 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import React from 'react';
 import { Icon, type IconTypes } from './Icon';
 import { Text } from './Text';
 import { getTheme, moderateScale, scale, verticalScale, width } from '../utils';
@@ -44,7 +43,7 @@ const QuestionnaireList = ({
   );
 };
 
-export default QuestionnaireList;
+export { QuestionnaireList };
 
 const styles = StyleSheet.create({
   root: {
