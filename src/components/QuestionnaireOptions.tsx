@@ -1,7 +1,8 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import React, { type ReactNode } from 'react';
+
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Text } from './Text';
+import type { ReactNode } from 'react';
 
 interface AnswerOption {
   valueString: string;
