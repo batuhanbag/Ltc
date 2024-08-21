@@ -13,20 +13,16 @@ interface QuestionnaireOptionsProps {
   selectedAnswers: any;
   currentQuestion: number;
   checkIconComponent: ReactNode;
+  isSelected: boolean;
 }
 
 const QuestionnaireOptions = ({
   index,
   item,
-  selectedAnswers,
-  currentQuestion,
   handleSelectAnswer,
   checkIconComponent,
+  isSelected,
 }: QuestionnaireOptionsProps) => {
-  const isSelected = React.useMemo(() => {
-    return selectedAnswers[currentQuestion] === item.valueString;
-  }, [currentQuestion, item.valueString, selectedAnswers]);
-
   return (
     <TouchableOpacity
       key={`${index}-answer`}
