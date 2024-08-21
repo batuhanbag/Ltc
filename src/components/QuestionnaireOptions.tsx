@@ -1,8 +1,7 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Text } from './Text';
-import type { IconTypes } from './Icon';
 
 interface AnswerOption {
   valueString: string;
@@ -13,7 +12,7 @@ interface QuestionnaireOptionsProps {
   handleSelectAnswer: (answer: string) => void;
   selectedAnswers: any;
   currentQuestion: number;
-  checkIcon: string | IconTypes;
+  checkIconComponent: ReactNode;
 }
 
 const QuestionnaireOptions = ({
@@ -22,7 +21,7 @@ const QuestionnaireOptions = ({
   selectedAnswers,
   currentQuestion,
   handleSelectAnswer,
-  checkIcon,
+  checkIconComponent,
 }: QuestionnaireOptionsProps) => {
   const isSelected = React.useMemo(() => {
     return selectedAnswers[currentQuestion] === item.valueString;
@@ -41,7 +40,7 @@ const QuestionnaireOptions = ({
           isSelected ? styles.selectedAnswerTextContainer : {},
         ]}
       >
-        {checkIcon}
+        {checkIconComponent}
         <Text
           text={item?.valueString}
           size="xs"
