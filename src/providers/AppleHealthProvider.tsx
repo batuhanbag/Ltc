@@ -22,6 +22,7 @@ const HealthContext = createContext<HealthContextType | undefined>(undefined);
 
 const { Permissions } = AppleHealthKit.Constants;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const generatePermissions = (
   readPermissions: HealthPermission[],
   writePermissions: HealthPermission[]
@@ -32,6 +33,13 @@ const generatePermissions = (
       write: writePermissions || [],
     },
   };
+};
+
+const permissions: HealthKitPermissions = {
+  permissions: {
+    read: [Permissions.Steps, Permissions.DistanceWalkingRunning],
+    write: [],
+  },
 };
 
 const AppleHealthProvider: React.FC<{
@@ -49,23 +57,16 @@ const AppleHealthProvider: React.FC<{
       return;
     }
 
-    console.log(
-      generatePermissions(readPermissions, writePermissions),
-      'generatePermissions(readPermissions, writePermissions)'
-    );
-    AppleHealthKit.initHealthKit(
-      generatePermissions(readPermissions, writePermissions),
-      (err) => {
-        if (err) {
-          console.error(
-            'Error initializing HealthKit and getting permissions',
-            err
-          );
-          return;
-        }
-        setHasPermission(true);
+    AppleHealthKit.initHealthKit(permissions, (err) => {
+      if (err) {
+        console.error(
+          'Error initializing HealthKit and getting permissions',
+          err
+        );
+        return;
       }
-    );
+      setHasPermission(true);
+    });
   }, [readPermissions, writePermissions]);
 
   useEffect(() => {
