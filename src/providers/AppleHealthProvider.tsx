@@ -66,7 +66,7 @@ const AppleHealthProvider: React.FC<{
         setHasPermission(true);
       }
     );
-  }, []);
+  }, [readPermissions, writePermissions]);
 
   useEffect(() => {
     if (!hasPermissions) {
