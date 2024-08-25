@@ -22,23 +22,16 @@ const HealthContext = createContext<HealthContextType | undefined>(undefined);
 
 const { Permissions } = AppleHealthKit.Constants;
 
-// const generatePermissions = (
-//   readPermissions: HealthPermission[],
-//   writePermissions: HealthPermission[]
-// ): HealthKitPermissions => {
-//   return {
-//     permissions: {
-//       read: readPermissions || [],
-//       write: writePermissions || [],
-//     },
-//   };
-// };
-
-const permissions: HealthKitPermissions = {
-  permissions: {
-    read: [Permissions.Steps, Permissions.DistanceWalkingRunning],
-    write: [],
-  },
+const generatePermissions = (
+  readPermissions: HealthPermission[],
+  writePermissions: HealthPermission[]
+): HealthKitPermissions => {
+  return {
+    permissions: {
+      read: readPermissions || [],
+      write: writePermissions || [],
+    },
+  };
 };
 
 const AppleHealthProvider: React.FC<{
@@ -56,17 +49,20 @@ const AppleHealthProvider: React.FC<{
       return;
     }
 
-    AppleHealthKit.initHealthKit(permissions, (err) => {
-      if (err) {
-        console.error(
-          'Error initializing HealthKit and getting permissions',
-          err
-        );
-        return;
+    AppleHealthKit.initHealthKit(
+      generatePermissions(readPermissions, writePermissions),
+      (err) => {
+        if (err) {
+          console.error(
+            'Error initializing HealthKit and getting permissions',
+            err
+          );
+          return;
+        }
+        setHasPermission(true);
       }
-      setHasPermission(true);
-    });
-  }, [readPermissions, writePermissions]);
+    );
+  }, []);
 
   useEffect(() => {
     if (!hasPermissions) {
@@ -75,6 +71,17 @@ const AppleHealthProvider: React.FC<{
     }
 
     const options: HealthInputOptions = healthOptions;
+
+    AppleHealthKit.getStepCount(options, (err, results) => {
+      if (err) {
+        console.error('Error getting the steps', err);
+        return;
+      }
+      setHealthData((prev) => ({
+        ...prev,
+        steps: results.value,
+      }));
+    });
 
     AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
       if (err) {
