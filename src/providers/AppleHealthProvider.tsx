@@ -22,18 +22,17 @@ const HealthContext = createContext<HealthContextType | undefined>(undefined);
 
 const { Permissions } = AppleHealthKit.Constants;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const generatePermissions = (
-  readPermissions: HealthPermission[],
-  writePermissions: HealthPermission[]
-): HealthKitPermissions => {
-  return {
-    permissions: {
-      read: readPermissions || [],
-      write: writePermissions || [],
-    },
-  };
-};
+// const generatePermissions = (
+//   readPermissions: HealthPermission[],
+//   writePermissions: HealthPermission[]
+// ): HealthKitPermissions => {
+//   return {
+//     permissions: {
+//       read: readPermissions || [],
+//       write: writePermissions || [],
+//     },
+//   };
+// };
 
 const permissions: HealthKitPermissions = {
   permissions: {
