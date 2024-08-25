@@ -49,6 +49,10 @@ const AppleHealthProvider: React.FC<{
       return;
     }
 
+    console.log(
+      generatePermissions(readPermissions, writePermissions),
+      'generatePermissions(readPermissions, writePermissions)'
+    );
     AppleHealthKit.initHealthKit(
       generatePermissions(readPermissions, writePermissions),
       (err) => {
