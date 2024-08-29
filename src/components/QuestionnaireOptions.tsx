@@ -38,6 +38,11 @@ const QuestionnaireOptions = ({
           styles.anwerTextContainer,
           isSelected ? styles.selectedAnswerTextContainer : {},
           { width: optionWidth },
+          // eslint-disable-next-line react-native/no-inline-styles
+          {
+            borderWidth: isSelected ? 1 : 0,
+            borderColor: isSelected ? getTheme().colors.primary : 'transparent',
+          },
         ]}
       >
         {checkIconComponent}
@@ -61,9 +66,6 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(10),
     backgroundColor: getTheme().colors.secondary,
     borderRadius: moderateScale(32),
-    borderWidth: 1,
-    borderColor: getTheme().colors.primary,
-
     paddingLeft: scale(10),
     gap: scale(10),
   },
