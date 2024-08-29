@@ -61,7 +61,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   );
 
   const keyExtractor = useCallback(
-    (item: AnswerOption, index: number) => `${index}-keywords`,
+    (_item: AnswerOption, index: number) => `${index}-keywords`,
     []
   );
 

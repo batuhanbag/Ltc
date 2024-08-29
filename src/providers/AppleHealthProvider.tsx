@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Platform } from 'react-native';
+
 import AppleHealthKit, {
   type HealthPermission,
   type HealthInputOptions,
@@ -72,7 +73,7 @@ const AppleHealthProvider: React.FC<{
 
     const options: HealthInputOptions = healthOptions;
 
-    AppleHealthKit.getStepCount(options, (err, results) => {
+    AppleHealthKit.getStepCount(options, (err: any, results: any) => {
       if (err) {
         console.error('Error getting the steps', err);
         return;
