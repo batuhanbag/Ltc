@@ -15,6 +15,7 @@ interface QuestionnaireOptionsProps {
   currentQuestion: number;
   checkIconComponent: ReactNode;
   isSelected: boolean;
+  optionWidth: number;
 }
 
 const QuestionnaireOptions = ({
@@ -23,6 +24,7 @@ const QuestionnaireOptions = ({
   handleSelectAnswer,
   checkIconComponent,
   isSelected,
+  optionWidth,
 }: QuestionnaireOptionsProps) => {
   return (
     <TouchableOpacity
@@ -35,6 +37,7 @@ const QuestionnaireOptions = ({
         style={[
           styles.anwerTextContainer,
           isSelected ? styles.selectedAnswerTextContainer : {},
+          { width: optionWidth },
         ]}
       >
         {checkIconComponent}
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12),
     borderWidth: 1,
     borderColor: getTheme().colors.primary,
-    width: scale(300),
+
     paddingLeft: scale(10),
     gap: scale(10),
   },
