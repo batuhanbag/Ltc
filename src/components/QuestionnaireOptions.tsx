@@ -44,7 +44,7 @@ const QuestionnaireOptions = ({
         <Text
           text={item?.valueString}
           size="xs"
-          color={isSelected ? getTheme().colors.white : getTheme().colors.black}
+          color={getTheme().colors.black}
           style={styles.answerText}
         />
       </View>
