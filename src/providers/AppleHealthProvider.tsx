@@ -83,16 +83,19 @@ const AppleHealthProvider: React.FC<{
       }));
     });
 
-    AppleHealthKit.getDistanceWalkingRunning(options, (err, results) => {
-      if (err) {
-        console.error('Error getting the walking/running distance', err);
-        return;
+    AppleHealthKit.getDistanceWalkingRunning(
+      options,
+      (err: any, results: any) => {
+        if (err) {
+          console.error('Error getting the walking/running distance', err);
+          return;
+        }
+        setHealthData((prev) => ({
+          ...prev,
+          walkDistance: results.value,
+        }));
       }
-      setHealthData((prev) => ({
-        ...prev,
-        walkDistance: results.value,
-      }));
-    });
+    );
   }, [hasPermissions]);
 
   return (
