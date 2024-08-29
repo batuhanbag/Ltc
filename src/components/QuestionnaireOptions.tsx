@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: verticalScale(10),
-    backgroundColor: '#FFFFFF',
-    borderRadius: moderateScale(12),
+    backgroundColor: getTheme().colors.secondary,
+    borderRadius: moderateScale(32),
     borderWidth: 1,
     borderColor: getTheme().colors.primary,
 
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     gap: scale(10),
   },
   selectedAnswerTextContainer: {
-    backgroundColor: getTheme().colors.primary,
+    backgroundColor: getTheme().colors.secondary,
+    borderColor: getTheme().colors.primary,
   },
   answerText: {
     flex: 1,
