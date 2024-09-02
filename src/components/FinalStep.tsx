@@ -14,6 +14,8 @@ interface FinalStepProps {
     setProgress: React.Dispatch<React.SetStateAction<number>>,
     handleFinish: () => void
   ) => void;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  progress: number;
 }
 
 const FinalStep = ({
@@ -22,12 +24,12 @@ const FinalStep = ({
   progressComponent,
   fakeLoadingData,
   fakeLoadingTimeout,
+  setProgress,
+  progress,
 }: FinalStepProps) => {
-  const [progress, setProgress] = React.useState(0);
-
   React.useEffect(() => {
     fakeLoadingTimeout(setProgress, handleFinish);
-  }, [fakeLoadingTimeout, handleFinish]);
+  }, [fakeLoadingTimeout, setProgress, handleFinish]);
 
   const stepContent = React.useMemo(() => {
     return fakeLoadingData(progress);
