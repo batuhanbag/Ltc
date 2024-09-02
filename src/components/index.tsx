@@ -37,3 +37,5 @@ export * from './AuthSocialButtons';
 export * from './QuestionnaireList';
 export * from './QuestionnaireOptions';
 export * from './SelectKeywords';
+export * from './EnteredName';
+export * from './FinalStep';
