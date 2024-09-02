@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { getTheme, height, scale, verticalScale } from '../utils';
@@ -29,11 +30,11 @@ const FinalStep = ({
 }: FinalStepProps) => {
   React.useEffect(() => {
     fakeLoadingTimeout(setProgress, handleFinish);
-  }, [fakeLoadingTimeout, setProgress, handleFinish]);
+  }, []);
 
   const stepContent = React.useMemo(() => {
     return fakeLoadingData(progress);
-  }, [fakeLoadingData, progress]);
+  }, [progress]);
   return (
     <View>
       <View style={styles.stepContentContainer}>
