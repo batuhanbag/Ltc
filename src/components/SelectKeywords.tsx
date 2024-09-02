@@ -1,13 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
-import {
-  getTheme,
-  Icon,
-  moderateScale,
-  scale,
-  Text,
-  verticalScale,
-} from 'react-native-lifetech-components';
+import { getTheme, moderateScale, scale, verticalScale } from '../utils';
+import { Text } from './Text';
+import { Icon } from './Icon';
 
 interface QuestionnaireAnswersItem {
   linkId: string;
