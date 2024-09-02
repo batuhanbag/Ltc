@@ -64,7 +64,7 @@ const FinalStep = ({
   );
 };
 
-export default FinalStep;
+export { FinalStep };
 
 const styles = StyleSheet.create({
   stepContentContainer: {
