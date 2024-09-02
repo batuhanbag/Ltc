@@ -1,8 +1,13 @@
 import { useCallback, useMemo } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { getTheme, moderateScale, scale, verticalScale, width } from '../utils';
-import { Icon } from './Icon';
-import { Text } from './Text';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  getTheme,
+  Icon,
+  moderateScale,
+  scale,
+  Text,
+  verticalScale,
+} from 'react-native-lifetech-components';
 
 interface QuestionnaireAnswersItem {
   linkId: string;
@@ -21,6 +26,7 @@ interface SelectKeywordsProps {
   selectedAnswers?: Record<number, string>;
   setSelectedAnswers?: (answers: Record<number, string>) => void;
   currentQuestion: number;
+  questionsLength: number;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -28,6 +34,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   currentQuestion,
   selectedAnswers = {},
   setSelectedAnswers,
+  questionsLength,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
@@ -49,11 +56,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
           style={[styles.keyword, isSelected && styles.selectedKeyword]}
         >
           <Icon icon={isSelected ? 'checkCircle' : 'noCheckCircle'} size={24} />
-          <Text
-            text={item.valueString}
-            size="sm"
-            color={getTheme().colors.black}
-          />
+          <Text text={item.valueString} size="sm" color="black" />
         </TouchableOpacity>
       );
     },
@@ -77,6 +80,24 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
       contentContainerStyle={styles.keywordsContainer}
       renderItem={renderAnswers}
       scrollEnabled={false}
+      ListHeaderComponent={
+        <>
+          <View style={styles.progressBarContainer}>
+            <Text
+              text={`Question: ${currentQuestion}/${questionsLength}`}
+              size="sm"
+              color={getTheme().colors.primary}
+            />
+          </View>
+          <View style={styles.currentQuestion}>
+            <Text
+              text="Over the past 2 weeks, how often have you been bothered by any of the following problems:"
+              size="xs"
+              color={getTheme().colors.gray}
+            />
+          </View>
+        </>
+      }
     />
   );
 };
@@ -84,10 +105,21 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
 const styles = StyleSheet.create({
   keywordsContainer: {
     gap: verticalScale(20),
-    flex: 1,
+    paddingVertical: verticalScale(20),
+    backgroundColor: getTheme().colors.white,
+    paddingHorizontal: moderateScale(15),
+    borderRadius: moderateScale(24),
+    shadowColor: getTheme().colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   keyword: {
-    width: width - scale(40),
+    width: scale(280),
     paddingVertical: verticalScale(10),
     alignItems: 'center',
     borderRadius: moderateScale(50),
@@ -100,6 +132,16 @@ const styles = StyleSheet.create({
   },
   selectedKeyword: {
     borderColor: getTheme().colors.primary,
+  },
+  progressBarContainer: {
+    gap: verticalScale(10),
+    width: scale(300),
+  },
+  currentQuestion: {
+    gap: verticalScale(15),
+  },
+  answerContainer: {
+    gap: verticalScale(10),
   },
 });
 
