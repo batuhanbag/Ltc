@@ -1,6 +1,8 @@
 import {
   type AuthMeResponse,
   type ChangePasswordBody,
+  type ForgotPasswordBody,
+  type ForgotPasswordResponse,
   type IAuthService,
   type LoginBody,
   type LoginResponse,
@@ -20,8 +22,11 @@ class AuthService implements IAuthService {
     return data;
   };
 
-  public forgotPassword = async (email: string): Promise<any> => {
-    return Promise.resolve(email);
+  public forgotPassword = async (
+    body: ForgotPasswordBody
+  ): Promise<ForgotPasswordResponse> => {
+    const { data } = await axiosInstance.post('/auth/reset-password', body);
+    return data;
   };
 
   public changePassword = async (body: ChangePasswordBody): Promise<any> => {

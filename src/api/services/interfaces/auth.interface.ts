@@ -1,7 +1,9 @@
 export interface IAuthService {
   readonly login: (body: LoginBody) => Promise<LoginResponse>;
   readonly register: (body: RegisterBody) => Promise<RegisterResponse>;
-  readonly forgotPassword: (email: string) => Promise<any>;
+  readonly forgotPassword: (
+    body: ForgotPasswordBody
+  ) => Promise<ForgotPasswordResponse>;
   readonly changePassword: (body: ChangePasswordBody) => Promise<any>;
   readonly resetPassword: (body: ResetPasswordBody) => Promise<any>;
   readonly deleteUserAccount: (isSoftDelete: boolean) => Promise<any>;
@@ -171,4 +173,38 @@ export interface Session {
   lastUpdated: string;
   authMethod: string;
   remoteAddress: string;
+}
+
+export interface ForgotPasswordBody {
+  email: string;
+  sendDefaultEmail: boolean;
+  recaptchaToken: string;
+  projectId: string;
+}
+
+export interface ForgotPasswordResponse {
+  resourceType: string;
+  id: string;
+  issue: Issue[];
+  extension: Extension[];
+}
+
+export interface Issue {
+  severity: string;
+  code: string;
+  details: Details;
+}
+
+export interface Details {
+  text: string;
+}
+
+export interface Extension {
+  url: string;
+  extension: Extension2[];
+}
+
+export interface Extension2 {
+  url: string;
+  valueId: string;
 }
