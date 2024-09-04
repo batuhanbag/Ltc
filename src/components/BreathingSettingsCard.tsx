@@ -24,6 +24,7 @@ interface BreathingSettingsCardProps {
   maxValue?: number;
   leftIconPress?: () => void;
   rightIconPress?: () => void;
+  disabled?: boolean;
 }
 
 const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
@@ -37,10 +38,11 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
   valueTextStyle,
   breathsTextStyle,
   buttonContainerStyle,
-  minValue = 1,
+
   maxValue = Infinity,
   leftIconPress,
   rightIconPress,
+  disabled = false,
 }) => {
   const styles = createStyles(backgroundColor);
 
@@ -49,14 +51,9 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
       <TouchableOpacity
         onPress={leftIconPress}
         style={[styles.settingsButtonContainer, buttonContainerStyle]}
-        disabled={value <= minValue}
+        disabled={disabled}
       >
-        <Icon
-          icon={leftIcon}
-          size={iconSize}
-          color={value <= minValue ? getTheme().colors.gray : undefined}
-          onPress={leftIconPress}
-        />
+        <Icon icon={leftIcon} size={iconSize} />
       </TouchableOpacity>
       <View style={[styles.valueContainer, valueContainerStyle]}>
         <Text
