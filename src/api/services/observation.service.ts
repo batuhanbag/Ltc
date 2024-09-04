@@ -11,6 +11,16 @@ class ObservationService implements IObservationService {
     const { data } = await axiosInstance.post('/observation', request);
     return data;
   }
+
+  async getObservationBetweenDates(
+    startDate: Date,
+    endDate: Date
+  ): Promise<CreateObservationResponse[]> {
+    const { data } = await axiosInstance.get(
+      `/resource/Observation?date=gt${startDate}&date=lt${endDate}`
+    );
+    return data;
+  }
 }
 
 const observation = new ObservationService();
