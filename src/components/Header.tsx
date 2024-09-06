@@ -1,6 +1,7 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
 import { scale, verticalScale } from '../utils/window';
+import { getTheme } from '../utils';
 
 interface HeaderProps {
   type:
@@ -50,7 +51,7 @@ const Header = ({
     <View style={[styles.headerContainer, getHeaderStyle()]}>
       {(type === 'singleWithLeftIcon' || type === 'double') &&
         renderIcon(leftIcon, leftIconPress)}
-      <Text text={title} />
+      <Text text={title} color={getTheme().colors.primary} />
       {(type === 'singleWithRightIcon' || type === 'double') &&
         renderIcon(rightIcon, rightIconPress)}
       {type !== 'single' && type !== 'singleCenter' && (
