@@ -16,7 +16,7 @@ const AuthLine = ({ text }: AuthLineProps) => {
   );
 };
 
-export default AuthLine;
+export { AuthLine };
 
 const styles = StyleSheet.create({
   lineContainer: {

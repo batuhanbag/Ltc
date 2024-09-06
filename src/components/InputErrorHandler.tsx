@@ -6,7 +6,7 @@ interface ErrorHandlerProps {
   error: string;
 }
 
-const ErrorHandler = ({ error }: ErrorHandlerProps) => {
+const InputErrorHandler = ({ error }: ErrorHandlerProps) => {
   return (
     <View style={styles.errorContainer}>
       <Icon icon="inputWarning" size={16} />
@@ -22,7 +22,7 @@ const ErrorHandler = ({ error }: ErrorHandlerProps) => {
   );
 };
 
-export { ErrorHandler };
+export { InputErrorHandler };
 
 const styles = StyleSheet.create({
   errorContainer: {

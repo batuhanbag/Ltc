@@ -32,6 +32,6 @@ export * from './EnteredName';
 export * from './FinalStep';
 export * from './ChatListItem';
 export * from './TodayQuestionCard';
-export * from './ErrorHandler';
+export * from './InputErrorHandler';
 export * from './AuthLine';
 export * from './AuthBottom';
