@@ -11,7 +11,11 @@ import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { truncateText } from '../utils/truncateText';
 
 interface AnswerDetailProps {
-  item: any | undefined | null;
+  item: {
+    date: string;
+    text: string;
+    answer: string;
+  };
   index: number;
   onAnswerPress: () => void;
   dateTextStyle: StyleProp<TextStyle>;
