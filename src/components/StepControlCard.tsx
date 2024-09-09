@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  type StyleProp,
+  type TextStyle,
+  type ViewStyle,
+} from 'react-native';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Icon, type IconTypes } from './Icon';
 import { Text, type Sizes } from './Text';
@@ -20,6 +26,8 @@ interface StepControlCardProps {
   timeFontSize?: Sizes;
   timeColor?: string;
   itemSpacing?: number;
+  titleFontStyle?: StyleProp<TextStyle>;
+  timeFontStyle?: StyleProp<TextStyle>;
 }
 
 const StepControlCard: React.FC<StepControlCardProps> = ({
@@ -30,6 +38,8 @@ const StepControlCard: React.FC<StepControlCardProps> = ({
   timeFontSize = 'sm',
   timeColor = getTheme().colors.secondary,
   itemSpacing = scale(8),
+  titleFontStyle,
+  timeFontStyle,
 }) => {
   const styles = createStyles(itemSpacing);
 
@@ -39,8 +49,17 @@ const StepControlCard: React.FC<StepControlCardProps> = ({
         <View key={`breathingStep-${index}`} style={styles.stepItemContainer}>
           <Icon icon={step.icon} size={iconSize} />
           <View style={styles.textContainer}>
-            <Text text={step.title} size={titleFontSize} />
-            <Text text={step.time} size={timeFontSize} color={timeColor} />
+            <Text
+              text={step.title}
+              size={titleFontSize}
+              style={titleFontStyle}
+            />
+            <Text
+              text={step.time}
+              size={timeFontSize}
+              color={timeColor}
+              style={timeFontStyle}
+            />
           </View>
         </View>
       ))}
