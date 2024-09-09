@@ -46,7 +46,7 @@ const FinalStep = ({
     return fakeLoadingData(progress);
   }, [progress]);
   return (
-    <View>
+    <View style={styles.root}>
       <View style={styles.stepContentContainer}>
         {stepContent?.map((item, index) => (
           <View style={styles.steps} key={`stepContent-${index}`}>
@@ -85,6 +85,12 @@ const FinalStep = ({
 export { FinalStep };
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
   stepContentContainer: {
     gap: verticalScale(30),
   },
