@@ -18,6 +18,8 @@ interface TodayQuestionCardProps {
   onAnswerPress?: () => void;
   cardStyle?: StyleProp<ViewStyle>;
   buttonStyle?: StyleProp<ViewStyle>;
+  todayTitleStyle?: StyleProp<ViewStyle>;
+  todayQuestionStyle?: StyleProp<ViewStyle>;
 }
 
 const TodayQuestionCard = ({
@@ -26,6 +28,8 @@ const TodayQuestionCard = ({
   onAnswerPress,
   cardStyle,
   buttonStyle,
+  todayTitleStyle,
+  todayQuestionStyle,
 }: TodayQuestionCardProps) => {
   return (
     <View style={styles.card ?? cardStyle}>
@@ -33,8 +37,9 @@ const TodayQuestionCard = ({
         text={"Today's Question"}
         size="xs"
         color={getTheme().colors.black}
+        style={todayTitleStyle}
       />
-      <Text text={randomQuestion.text} size="md" />
+      <Text text={randomQuestion.text} size="md" style={todayQuestionStyle} />
       <View style={styles.buttons ?? buttonStyle}>
         <TouchableOpacity onPress={onShufflePress} activeOpacity={0.8}>
           <Icon icon="shuffle" size={36} />

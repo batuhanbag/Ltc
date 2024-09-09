@@ -1,4 +1,9 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import React from 'react';
 import { Text } from '.';
 import moment from 'moment';
@@ -9,9 +14,19 @@ interface AnswerDetailProps {
   item: any | undefined;
   index: number;
   onAnswerPress: () => void;
+  dateTextStyle: StyleProp<TextStyle>;
+  questionTextStyle: StyleProp<TextStyle>;
+  answerTextStyle: StyleProp<TextStyle>;
 }
 
-const AnswerDetail = ({ index, item, onAnswerPress }: AnswerDetailProps) => {
+const AnswerDetail = ({
+  index,
+  item,
+  onAnswerPress,
+  dateTextStyle,
+  questionTextStyle,
+  answerTextStyle,
+}: AnswerDetailProps) => {
   const today = moment().format('YYYY-MM-DD');
 
   const dateManipulation = React.useCallback(
@@ -37,14 +52,19 @@ const AnswerDetail = ({ index, item, onAnswerPress }: AnswerDetailProps) => {
         text={dateManipulation(item?.date ?? '')}
         color={getTheme().colors.black}
         size="sm"
+        style={dateTextStyle}
       />
-      <Text text={item?.text.trim()} size="sm" style={styles.questionText} />
+      <Text
+        text={item?.text.trim()}
+        size="sm"
+        style={[styles.questionText, questionTextStyle]}
+      />
 
       <Text
         text={truncateText(item?.answer, 142)}
         color={getTheme().colors.black}
         size="xs"
-        style={styles.answerText}
+        style={[styles.answerText, answerTextStyle]}
       />
     </TouchableOpacity>
   );
