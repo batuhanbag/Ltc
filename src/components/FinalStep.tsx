@@ -25,6 +25,7 @@ interface FinalStepProps {
   progress: number;
   itemTextStyle?: StyleProp<TextStyle>;
   finalProgressTextStyle?: StyleProp<TextStyle>;
+  rootStyle?: StyleProp<TextStyle>;
 }
 
 const FinalStep = ({
@@ -37,6 +38,7 @@ const FinalStep = ({
   progress,
   itemTextStyle,
   finalProgressTextStyle,
+  rootStyle,
 }: FinalStepProps) => {
   React.useEffect(() => {
     fakeLoadingTimeout(setProgress, handleFinish);
@@ -46,7 +48,7 @@ const FinalStep = ({
     return fakeLoadingData(progress);
   }, [progress]);
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, rootStyle]}>
       <View style={styles.stepContentContainer}>
         {stepContent?.map((item, index) => (
           <View style={styles.steps} key={`stepContent-${index}`}>
@@ -70,6 +72,7 @@ const FinalStep = ({
           </View>
         ))}
       </View>
+      <View />
       <View style={styles.finalProgressContainer}>
         <Text
           text={`Almost there.. ${Math.round(progress * 100)}%`}
