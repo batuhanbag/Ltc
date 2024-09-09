@@ -18,9 +18,9 @@ interface AnswerDetailProps {
   };
   index: number;
   onAnswerPress: () => void;
-  dateTextStyle: StyleProp<TextStyle>;
-  questionTextStyle: StyleProp<TextStyle>;
-  answerTextStyle: StyleProp<TextStyle>;
+  dateTextStyle?: StyleProp<TextStyle>;
+  questionTextStyle?: StyleProp<TextStyle>;
+  answerTextStyle?: StyleProp<TextStyle>;
 }
 
 const AnswerDetail = ({
