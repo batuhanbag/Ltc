@@ -50,7 +50,15 @@ const LanguageSwitcher = ({
       onPress={() => handleLanguageSelection(item.value)}
       activeOpacity={0.5}
       key={index}
-      style={styles.itemContainer}
+      style={[
+        styles.itemContainer,
+        {
+          borderColor:
+            selectedLanguage === item?.value
+              ? getTheme().colors.primary
+              : getTheme().colors.white,
+        },
+      ]}
     >
       <View style={styles.itemDetail}>
         <Icon
@@ -79,7 +87,7 @@ const LanguageSwitcher = ({
 
 export { LanguageSwitcher };
 
-const useStyles = makeStyles((props: LanguageSwitcherProps) => ({
+const useStyles = makeStyles(() => ({
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -89,10 +97,6 @@ const useStyles = makeStyles((props: LanguageSwitcherProps) => ({
     borderRadius: moderateScale(30),
     marginTop: verticalScale(10),
     borderWidth: 2,
-    borderColor:
-      props?.selectedLanguage === props?.item?.value
-        ? getTheme().colors.primary
-        : getTheme().colors.white,
   },
   itemDetail: { flexDirection: 'row', alignItems: 'center', gap: scale(10) },
 }));
