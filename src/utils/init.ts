@@ -1,6 +1,5 @@
 import type { AxiosInstance } from 'axios';
 import type { OpenaiValues, ThemeConfig } from '../../typings';
-
 export type Client = AxiosInstance;
 export type ClientRequest = Client['request'];
 

@@ -1,5 +1,12 @@
 import { useCallback, useMemo } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Text } from './Text';
 import { Icon } from './Icon';
@@ -22,6 +29,7 @@ interface SelectKeywordsProps {
   setSelectedAnswers?: (answers: Record<number, string>) => void;
   currentQuestion: number;
   questionsLength: number;
+  valueTextStyle?: StyleProp<TextStyle>;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -30,6 +38,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   selectedAnswers = {},
   setSelectedAnswers,
   questionsLength,
+  valueTextStyle,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
@@ -51,11 +60,16 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
           style={[styles.keyword, isSelected && styles.selectedKeyword]}
         >
           <Icon icon={isSelected ? 'checkCircle' : 'noCheckCircle'} size={24} />
-          <Text text={item.valueString} size="sm" color="black" />
+          <Text
+            text={item.valueString}
+            size="sm"
+            color="black"
+            style={valueTextStyle}
+          />
         </TouchableOpacity>
       );
     },
-    [currentQuestion, selectedAnswers, handleSelectKeywords]
+    [currentQuestion, selectedAnswers, handleSelectKeywords, valueTextStyle]
   );
 
   const keyExtractor = useCallback(

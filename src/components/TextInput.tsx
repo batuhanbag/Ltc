@@ -1,5 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import { View, TextInput as RNTextInput, StyleSheet } from 'react-native';
+import {
+  View,
+  TextInput as RNTextInput,
+  StyleSheet,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import React from 'react';
 import { getTheme } from '../utils/init';
 import type { IconTypes } from './Icon';
@@ -39,6 +45,7 @@ interface TextInputProps {
   onSubmitEditing?: () => void;
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
   textArea?: boolean;
+  labelTextStyle?: StyleProp<TextStyle>;
 }
 
 const TextInput = (props: TextInputProps) => {
@@ -71,6 +78,7 @@ const TextInput = (props: TextInputProps) => {
     onSubmitEditing,
     returnKeyType,
     textArea,
+    labelTextStyle,
   } = props;
   const [isFocused, setIsFocused] = React.useState(false);
   const handleFocus = () => {
@@ -102,7 +110,7 @@ const TextInput = (props: TextInputProps) => {
   return (
     <React.Fragment>
       <View>
-        {label && <Text style={styles.label}>{label}</Text>}
+        {label && <Text style={[styles.label, labelTextStyle]}>{label}</Text>}
         <View
           style={[
             styles.container,

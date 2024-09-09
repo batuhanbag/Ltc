@@ -1,4 +1,10 @@
-import { Image, StyleSheet, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 
 import { Text } from './Text';
 import { verticalScale } from '../utils';
@@ -6,16 +12,18 @@ import { verticalScale } from '../utils';
 interface BreathingSelectHeaderProps {
   headerImg: any;
   text: string;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const BreathingSelectHeader = ({
   headerImg,
   text,
+  textStyle,
 }: BreathingSelectHeaderProps) => {
   return (
     <View style={styles.header}>
       <Image source={headerImg} />
-      <Text text={text} size="sm" color={'#373748'} />
+      <Text style={textStyle} text={text} size="sm" color={'#373748'} />
     </View>
   );
 };

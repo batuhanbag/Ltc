@@ -1,4 +1,10 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
 import { scale, verticalScale } from '../utils/window';
 import { getTheme } from '../utils';
@@ -16,6 +22,7 @@ interface HeaderProps {
   rightIconPress?: () => void;
   leftIconPress?: () => void;
   iconColor?: string;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const Header = ({
@@ -26,6 +33,7 @@ const Header = ({
   rightIconPress,
   leftIconPress,
   iconColor,
+  textStyle,
 }: HeaderProps) => {
   const renderIcon = (icon?: IconTypes, onPress?: () => void) =>
     icon ? (
@@ -51,7 +59,7 @@ const Header = ({
     <View style={[styles.headerContainer, getHeaderStyle()]}>
       {(type === 'singleWithLeftIcon' || type === 'double') &&
         renderIcon(leftIcon, leftIconPress)}
-      <Text text={title} color={getTheme().colors.primary} />
+      <Text text={title} color={getTheme().colors.primary} style={textStyle} />
       {(type === 'singleWithRightIcon' || type === 'double') &&
         renderIcon(rightIcon, rightIconPress)}
       {type !== 'single' && type !== 'singleCenter' && (

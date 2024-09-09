@@ -45,6 +45,7 @@ interface ButtonProps {
   onPress?: (event: GestureResponderEvent) => void;
   text: string;
   styles?: any;
+  buttonFontFamily?: string;
 }
 
 interface DefualtButtonProps {
@@ -62,6 +63,7 @@ interface DefualtButtonProps {
   onPress?: (event: GestureResponderEvent) => void;
   type: string;
   externalStyle?: any;
+  buttonFontFamily?: string;
 }
 
 const { colors } = getTheme();
@@ -109,7 +111,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   onPress,
   text,
-  styles,
+  buttonFontFamily,
 }) => {
   const {
     component: ButtonComponent,
@@ -132,6 +134,7 @@ const Button: React.FC<ButtonProps> = ({
       activityIndicatorColor={
         type === 'primary' ? colors.white : colors.primary
       }
+      buttonFontFamily={buttonFontFamily}
     />
   );
 };
@@ -149,6 +152,7 @@ const ButtonComponent: React.FC<DefualtButtonProps> = ({
   onPress,
   type,
   externalStyle,
+  buttonFontFamily,
 }) => {
   const buttonStyle = () => [
     styles.baseStyle,
@@ -172,6 +176,7 @@ const ButtonComponent: React.FC<DefualtButtonProps> = ({
     {
       color: textColor || color,
       fontSize: type === 'pill' ? getFontSize(14) : getFontSize(16),
+      fontFamily: buttonFontFamily,
     },
     disabled && { color: colors.gray },
   ];

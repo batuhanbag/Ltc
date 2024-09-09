@@ -38,6 +38,7 @@ interface CalendarProps {
   checkIconName?: IconTypes;
   completedIconName: IconTypes;
   failureIconName: IconTypes;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
@@ -45,6 +46,7 @@ const Calendar: React.FC<CalendarProps> = ({
   index,
   customDateCheck,
   completedDates,
+  textStyle,
   ...props
 }) => {
   const styles = useStyles(props);
@@ -75,7 +77,7 @@ const Calendar: React.FC<CalendarProps> = ({
       key={`${index}-day`}
       style={props.dayContainerStyle || styles.dayContainer}
     >
-      <Text style={getTextStyle()} text={day.name} />
+      <Text style={[getTextStyle(), textStyle]} text={day.name} />
       <Icon
         icon={
           completed

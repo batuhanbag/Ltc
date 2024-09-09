@@ -1,4 +1,12 @@
-import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import { Icon } from './Icon';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 
@@ -6,10 +14,12 @@ const SocialButton = ({
   platform,
   onPress,
   type,
+  buttonTextStyle,
 }: {
   platform: 'apple' | 'google';
   onPress: () => void;
   type: 'signin' | 'continue';
+  buttonTextStyle?: StyleProp<TextStyle>;
 }) => {
   const isApple = platform === 'apple';
 
@@ -29,9 +39,11 @@ const SocialButton = ({
     >
       <Icon icon={isApple ? 'apple' : 'google'} size={moderateScale(24)} />
       <Text
-        style={
-          (styles.buttonText, !isApple ? { color: '#000' } : { color: '#FFF' })
-        }
+        style={[
+          styles.buttonText,
+          !isApple ? { color: '#000' } : { color: '#FFF' },
+          buttonTextStyle,
+        ]}
       >
         {buttonText}
       </Text>

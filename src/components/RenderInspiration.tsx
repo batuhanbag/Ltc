@@ -35,7 +35,7 @@ const RenderInspiration = ({
           uri: uri,
         }}
       >
-        <Text text={text} style={styles.renderText ?? textStyles} />
+        <Text text={text} style={[styles.renderText, textStyles]} />
       </ImageBackground>
     </Pressable>
   );

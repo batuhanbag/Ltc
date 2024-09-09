@@ -1,5 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import React from 'react';
 import { getTheme, height, scale, verticalScale } from '../utils';
 import { Text } from './Text';
@@ -17,6 +23,8 @@ interface FinalStepProps {
   ) => void;
   setProgress: React.Dispatch<React.SetStateAction<number>>;
   progress: number;
+  itemTextStyle?: StyleProp<TextStyle>;
+  finalProgressTextStyle?: StyleProp<TextStyle>;
 }
 
 const FinalStep = ({
@@ -27,6 +35,8 @@ const FinalStep = ({
   fakeLoadingTimeout,
   setProgress,
   progress,
+  itemTextStyle,
+  finalProgressTextStyle,
 }: FinalStepProps) => {
   React.useEffect(() => {
     fakeLoadingTimeout(setProgress, handleFinish);
@@ -52,7 +62,11 @@ const FinalStep = ({
                 }}
               />
             )}
-            <Text text={item.text} size="xxs" style={styles.stepsTexts} />
+            <Text
+              text={item.text}
+              size="xxs"
+              style={[styles.stepsTexts, itemTextStyle]}
+            />
           </View>
         ))}
       </View>
@@ -60,6 +74,7 @@ const FinalStep = ({
         <Text
           text={`Almost there.. ${Math.round(progress * 100)}%`}
           size="xxs"
+          style={finalProgressTextStyle}
         />
         {progressComponent}
       </View>

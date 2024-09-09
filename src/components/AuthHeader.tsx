@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, type StyleProp, type TextStyle } from 'react-native';
 import { Text } from '.';
 import { scale, verticalScale } from '../utils/window';
 import { getTheme } from '../utils';
@@ -6,14 +6,31 @@ import { getTheme } from '../utils';
 interface AuthHeaderProps {
   text: string;
   name: string;
+  textStyle?: StyleProp<TextStyle>;
+  nameTextStyle?: StyleProp<TextStyle>;
 }
 
-const AuthHeader = ({ text, name }: AuthHeaderProps) => {
+const AuthHeader = ({
+  text,
+  name,
+  textStyle,
+  nameTextStyle,
+}: AuthHeaderProps) => {
   return (
     <View style={styles.headerText}>
-      <Text text={text} size="xl" color={getTheme().colors.black} />
+      <Text
+        text={text}
+        size="xl"
+        color={getTheme().colors.black}
+        style={textStyle}
+      />
 
-      <Text text={name} size="xl" color={getTheme().colors.primary} />
+      <Text
+        style={nameTextStyle}
+        text={name}
+        size="xl"
+        color={getTheme().colors.primary}
+      />
     </View>
   );
 };

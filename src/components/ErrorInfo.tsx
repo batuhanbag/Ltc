@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, type StyleProp, type TextStyle } from 'react-native';
 import { getTheme } from '../utils/init';
 import { scale, verticalScale } from '../utils/window';
 import { Icon } from './Icon';
@@ -6,16 +6,17 @@ import { Text } from './Text';
 
 interface ErrorInfoProps {
   error: string;
+  errorTextStyle?: StyleProp<TextStyle>;
 }
 
 const { colors } = getTheme();
 
-const ErrorInfo = ({ error }: ErrorInfoProps) => {
+const ErrorInfo = ({ error, errorTextStyle }: ErrorInfoProps) => {
   return (
     <View style={styles.errorContainer}>
       <Icon icon="inputWarning" size={16} />
       <Text
-        style={styles.errorText}
+        style={[styles.errorText, errorTextStyle]}
         size="xxs"
         color={colors.error}
         textAlign="left"

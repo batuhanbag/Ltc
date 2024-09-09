@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   View,
   type ImageSourcePropType,
+  type StyleProp,
+  type TextStyle,
 } from 'react-native';
 import { Text } from './Text';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
@@ -16,12 +18,18 @@ interface BreathingSelectCardProps {
     title: string;
     goodFor: string;
   };
+  titleStyle?: StyleProp<TextStyle>;
+  goodForOneStyle?: StyleProp<TextStyle>;
+  goodForStyle?: StyleProp<TextStyle>;
 }
 
 const BreathingSelectCard = ({
   index,
   onPress,
   item,
+  titleStyle,
+  goodForOneStyle,
+  goodForStyle,
 }: BreathingSelectCardProps) => {
   return (
     <TouchableOpacity
@@ -31,10 +39,21 @@ const BreathingSelectCard = ({
     >
       <Image source={item.icon as ImageSourcePropType} />
       <View style={styles.breathingMethodTextContainer}>
-        <Text text={item.title} size="md" color={getTheme().colors.black} />
+        <Text
+          style={titleStyle}
+          text={item.title}
+          size="md"
+          color={getTheme().colors.black}
+        />
         <View style={styles.goodFor}>
-          <Text text="Good for:" size="xs" color={getTheme().colors.black} />
           <Text
+            style={goodForOneStyle}
+            text="Good for:"
+            size="xs"
+            color={getTheme().colors.black}
+          />
+          <Text
+            style={goodForStyle}
             text={item.goodFor}
             size="xs"
             color={getTheme().colors.primary}

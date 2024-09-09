@@ -1,16 +1,17 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, type StyleProp, type TextStyle } from 'react-native';
 import { Text } from '.';
 import { scale, verticalScale } from '../utils';
 
 interface AuthLineProps {
   text: string;
+  lineTextStyle: StyleProp<TextStyle>;
 }
 
-const AuthLine = ({ text }: AuthLineProps) => {
+const AuthLine = ({ text, lineTextStyle }: AuthLineProps) => {
   return (
     <View style={styles.lineContainer}>
       <View style={styles.line} />
-      <Text text={text} size="xs" color={'#b5b4b3'} />
+      <Text style={lineTextStyle} text={text} size="xs" color={'#b5b4b3'} />
       <View style={styles.line} />
     </View>
   );

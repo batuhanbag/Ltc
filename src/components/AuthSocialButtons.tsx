@@ -1,20 +1,32 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, type TextStyle, type StyleProp } from 'react-native';
 import { SocialButton } from './SocialButton';
 import { scale, verticalScale } from '../utils';
 
 interface AuthSocialButtonsProps {
   onGooglePress: () => void;
   onApplePress: () => void;
+  buttonTextStyle?: StyleProp<TextStyle>;
 }
 
 const AuthSocialButtons = ({
   onApplePress,
   onGooglePress,
+  buttonTextStyle,
 }: AuthSocialButtonsProps) => {
   return (
     <View style={styles.socialButtonContainer}>
-      <SocialButton platform="google" onPress={onGooglePress} type="signin" />
-      <SocialButton platform="apple" onPress={onApplePress} type="signin" />
+      <SocialButton
+        buttonTextStyle={buttonTextStyle}
+        platform="google"
+        onPress={onGooglePress}
+        type="signin"
+      />
+      <SocialButton
+        buttonTextStyle={buttonTextStyle}
+        platform="apple"
+        onPress={onApplePress}
+        type="signin"
+      />
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, type StyleProp, type TextStyle } from 'react-native';
 
 import { Text } from './Text';
 import { TextInput } from './TextInput';
@@ -7,12 +7,17 @@ import { verticalScale } from '../utils';
 interface FeelingsNoteProps {
   note: string;
   setNote: (text: string) => void;
+  headerTextStyle?: StyleProp<TextStyle>;
 }
 
-const FeelingsNote = ({ note, setNote }: FeelingsNoteProps) => {
+const FeelingsNote = ({
+  note,
+  setNote,
+  headerTextStyle,
+}: FeelingsNoteProps) => {
   return (
     <View style={styles.input}>
-      <Text text="How did this come about?" size="md" />
+      <Text text="How did this come about?" size="md" style={headerTextStyle} />
       <TextInput
         textArea
         placeholder="Write your feelings here"

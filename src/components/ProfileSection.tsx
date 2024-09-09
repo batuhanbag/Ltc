@@ -38,6 +38,7 @@ interface ProfileSectionProps {
   itemProps?: Partial<ProfileItemProps>;
   ListHeaderComponent?: React.ReactElement;
   ListFooterComponent?: React.ReactElement;
+  profileItemTextStyles?: StyleProp<TextStyle>;
 }
 
 const ProfileSection: React.FC<ProfileSectionProps> = ({
@@ -52,6 +53,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
   itemProps,
   ListHeaderComponent,
   ListFooterComponent,
+  profileItemTextStyles,
 }) => {
   const styles = useStyles();
 
@@ -73,6 +75,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
               item={subItem}
               index={subIndex}
               handlePress={handlePress}
+              textStyle={profileItemTextStyles}
               {...itemProps}
             />
           )}
