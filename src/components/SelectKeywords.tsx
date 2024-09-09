@@ -6,6 +6,7 @@ import {
   View,
   type StyleProp,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Text } from './Text';
@@ -32,6 +33,9 @@ interface SelectKeywordsProps {
   valueTextStyle?: StyleProp<TextStyle>;
   titleTextStyle?: StyleProp<TextStyle>;
   descriptionTextStyle?: StyleProp<TextStyle>;
+  questionContainerStyle?: StyleProp<ViewStyle>;
+  questionTextStyle?: StyleProp<TextStyle>;
+  question: string;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -43,6 +47,9 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   valueTextStyle,
   titleTextStyle,
   descriptionTextStyle,
+  questionContainerStyle,
+  questionTextStyle,
+  question,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
@@ -110,6 +117,9 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
               color={getTheme().colors.gray}
               style={descriptionTextStyle}
             />
+          </View>
+          <View style={questionContainerStyle}>
+            <Text text={question} style={questionTextStyle} />
           </View>
         </>
       }
