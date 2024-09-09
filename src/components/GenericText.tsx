@@ -1,17 +1,25 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import { verticalScale } from '../utils';
 
 interface GenericTextProps {
   text: string;
   boldWords: string[];
   onPress?: (word: string) => void;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const GenericText: React.FC<GenericTextProps> = ({
   text,
   boldWords,
   onPress,
+  textStyle,
 }) => {
   const renderTextWithBoldWords = (text: string, boldWords: string[]) => {
     let parts = [];
@@ -30,7 +38,7 @@ const GenericText: React.FC<GenericTextProps> = ({
             disabled={!onPress}
             onPress={() => onPress && onPress(boldWord)}
           >
-            <Text style={styles.bold}>
+            <Text style={[styles.bold, textStyle]}>
               {remainingText.substr(indexInText, boldWord.length)}
             </Text>
           </TouchableOpacity>
