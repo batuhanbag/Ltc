@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios';
-
 export interface GPTResponse {
   id: string;
   object: string;
@@ -33,18 +31,19 @@ export const getAIResponse = (response: GPTResponse): string => {
   const { choices } = response;
   return choices[0]?.message.content ?? '';
 };
-export async function makeGPTRequest(
-  userPrompt: string
-): Promise<AxiosResponse<any>> {
+export async function makeGPTRequest(userPrompt: string): Promise<GPTResponse> {
   const { botId } = OvokGPTValues;
 
   if (botId === undefined) {
     throw new Error('OvokGPTValues botId is not defined');
   }
-  const response = await axiosInstance.post(`/bot/${botId}/execute`, {
-    userPrompt,
-  });
-  return response.data;
+  const { data } = await axiosInstance.post<GPTResponse>(
+    `/bot/${botId}/execute`,
+    {
+      userPrompt,
+    }
+  );
+  return data;
 }
 
 export const makeUserChatGPTRequest = async (
@@ -52,7 +51,7 @@ export const makeUserChatGPTRequest = async (
 ): Promise<string> => {
   try {
     const gptRequestResponse = await makeGPTRequest(userPrompt);
-    return getAIResponse(gptRequestResponse?.data);
+    return getAIResponse(gptRequestResponse);
   } catch (error) {
     return `${error}`;
   }
