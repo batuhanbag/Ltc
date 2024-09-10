@@ -54,6 +54,6 @@ export const makeUserChatGPTRequest = async (
     const gptRequestResponse = await makeGPTRequest(userPrompt);
     return getAIResponse(gptRequestResponse?.data);
   } catch (error) {
-    return `Error : ${JSON.stringify(error)} :`;
+    return `${error}`;
   }
 };
