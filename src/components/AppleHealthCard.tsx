@@ -5,6 +5,7 @@ import {
   View,
   type StyleProp,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
 import { Images } from '../constants';
@@ -14,6 +15,8 @@ interface AppleHealthCardProps {
   step: number;
   titleTextStyles?: StyleProp<TextStyle>;
   stepsTextStyles?: StyleProp<TextStyle>;
+  rootStyle?: StyleProp<ViewStyle>;
+
   onPress?: () => void;
 }
 
@@ -22,9 +25,10 @@ const AppleHealthCard = ({
   stepsTextStyles,
   titleTextStyles,
   onPress,
+  rootStyle,
 }: AppleHealthCardProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.taskCard}>
+    <TouchableOpacity onPress={onPress} style={[styles.taskCard, rootStyle]}>
       <View>
         <Text text="Physical Activity" size="sm" style={titleTextStyles} />
         <Text
@@ -59,7 +63,6 @@ const styles = StyleSheet.create({
     width: width / 2 - scale(30),
     backgroundColor: getTheme().colors.white,
     marginRight: scale(20),
-    marginBottom: verticalScale(40),
   },
   taskName: {
     fontSize: moderateScale(16),
