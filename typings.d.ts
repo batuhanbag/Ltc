@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 export declare global {
   var axiosInstance: AxiosInstance;
   var openaiValues: OpenaiValues;
+  var OvokGPTValues: OVOKGPTValues;
 }
 
 export interface ThemeConfig {
@@ -35,4 +36,8 @@ export interface OpenaiValues {
   api_key: string;
 }
 
-module.exports = { openaiValues };
+export interface OVOKGPTValues {
+  botUrl: string;
+}
+
+module.exports = { openaiValues, OvokGPTValues };

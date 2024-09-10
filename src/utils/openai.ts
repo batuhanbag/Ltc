@@ -1,72 +1,60 @@
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
-import type { OpenaiValues } from 'typings';
 
-interface GPTResponse {
-  choices?: [{ message: { content: string } }] | undefined;
+export interface GPTResponse {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  choices: Choice[];
+  usage: Usage;
+  system_fingerprint: string;
 }
 
-const OPEN_AI_CHAT_COMPLETION_URL =
-  'https://api.openai.com/v1/chat/completions';
+export interface Choice {
+  index: number;
+  message: Message;
+  logprobs: any;
+  finish_reason: string;
+}
 
-const gptAxios = (OPEN_AI_API_KEY: string) => {
-  return axios.create({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPEN_AI_API_KEY}`,
-    },
-  });
+export interface Message {
+  role: string;
+  content: string;
+  refusal: any;
+}
+
+export interface Usage {
+  prompt_tokens: number;
+  completion_tokens: number;
+  total_tokens: number;
+}
+
+export const getAIResponse = (response: GPTResponse): string => {
+  const { choices } = response;
+  return choices[0]?.message.content ?? '';
 };
-
-export function getAIResponse(response: {
-  choices?: [{ message: { content: string } }];
-}): string | undefined {
-  const fullResponse: string | undefined =
-    response.choices?.[0]?.message?.content;
-  return fullResponse;
-}
-
 export async function makeGPTRequest(
-  userPrompt: string,
-  systemPrompt: string
+  userPrompt: string
 ): Promise<AxiosResponse<any>> {
-  const { api_key, max_tokens, model } = openaiValues as OpenaiValues;
+  const { botUrl } = OvokGPTValues;
 
-  if (api_key === undefined) {
-    throw new Error('OpenAI API key is not set');
+  if (botUrl === undefined) {
+    throw new Error('OvokGPTValues botUrl is not defined');
   }
-  const response = await gptAxios(api_key).post(
-    OPEN_AI_CHAT_COMPLETION_URL,
-    JSON.stringify({
-      model,
-      messages: [
-        generateSystemPrompt(systemPrompt),
-        { role: 'user', content: userPrompt },
-      ],
-      max_tokens,
-    })
-  );
+  const response = await axios.post(botUrl, {
+    prompt: userPrompt,
+  });
   return response.data;
 }
 
-export const generateSystemPrompt = (prompt: string) => {
-  return {
-    role: 'system',
-    content: prompt,
-  };
-};
-
 export const makeUserChatGPTRequest = async (
-  userPrompt: string,
-  systemPrompt: string
+  userPrompt: string
 ): Promise<string> => {
   try {
-    const gptRequestResponse: GPTResponse = (await makeGPTRequest(
-      userPrompt,
-      systemPrompt
-    )) as GPTResponse;
+    const gptRequestResponse = await makeGPTRequest(userPrompt);
 
-    return getAIResponse(gptRequestResponse) as string;
+    return getAIResponse(gptRequestResponse?.data);
   } catch (error) {
     return `Error : ${JSON.stringify(error)} :`;
   }

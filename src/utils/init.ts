@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios';
-import type { OpenaiValues, ThemeConfig } from '../../typings';
+import type { OpenaiValues, OVOKGPTValues, ThemeConfig } from '../../typings';
 export type Client = AxiosInstance;
 export type ClientRequest = Client['request'];
 
@@ -47,6 +47,10 @@ function initOpenaiValues(openaiValues: OpenaiValues) {
   localOpenaiValues = openaiValues;
 }
 
+function initOvokGPTValues(values: OVOKGPTValues) {
+  global.OvokGPTValues = values;
+}
+
 function initTheme(config: Partial<ThemeConfig>) {
   currentTheme = { ...defaultTheme, ...config };
 }
@@ -55,8 +59,8 @@ const getTheme = (): ThemeConfig => {
   return currentTheme;
 };
 
-const getOpenAIValues = (): OpenaiValues => {
-  return global.openaiValues;
+const getOvokBotValues = (): OVOKGPTValues => {
+  return global.OvokGPTValues;
 };
 
 const getOpenAIValues3 = (): OpenaiValues => {
@@ -68,6 +72,7 @@ export {
   initTheme,
   getTheme,
   initOpenaiValues,
-  getOpenAIValues,
+  getOvokBotValues,
   getOpenAIValues3,
+  initOvokGPTValues,
 };
