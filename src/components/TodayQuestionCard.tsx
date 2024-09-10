@@ -6,7 +6,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { Icon, Text } from '.';
-import { getTheme, moderateScale, verticalScale } from '../utils';
+import { getTheme, verticalScale } from '../utils';
 import React from 'react';
 
 interface TodayQuestionCardProps {
@@ -35,7 +35,7 @@ const TodayQuestionCard = ({
   wrapperLinearGradientComponent,
 }: TodayQuestionCardProps) => {
   const cardContent = (
-    <View style={styles.card ?? cardStyle}>
+    <View style={cardStyle}>
       <Text
         text={"Today's Question"}
         size="xs"
@@ -70,14 +70,6 @@ const TodayQuestionCard = ({
 export { TodayQuestionCard };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: getTheme().colors.white,
-    padding: moderateScale(20),
-    borderRadius: 16,
-    gap: verticalScale(6),
-    marginTop: verticalScale(20),
-  },
-
   buttons: {
     justifyContent: 'flex-end',
     flexDirection: 'row',
