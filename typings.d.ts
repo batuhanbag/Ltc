@@ -37,7 +37,7 @@ export interface OpenaiValues {
 }
 
 export interface OVOKGPTValues {
-  botUrl: string;
+  botId: string;
 }
 
 module.exports = { openaiValues, OvokGPTValues };
