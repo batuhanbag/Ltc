@@ -1,5 +1,4 @@
 import {
-  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -8,16 +7,18 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { Icon, Text, type IconTypes } from '.';
-import { Images } from '../constants';
+
 import { getTheme, moderateScale, scale, verticalScale, width } from '../utils';
 
 interface AppleHealthCardProps {
   step: number;
+  cardTitle?: string;
+  cardSubTitle?: string;
   titleTextStyles?: StyleProp<TextStyle>;
   stepsTextStyles?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<ViewStyle>;
-
   onPress?: () => void;
+  cardIcon?: IconTypes;
 }
 
 const AppleHealthCard = ({
@@ -26,25 +27,22 @@ const AppleHealthCard = ({
   titleTextStyles,
   onPress,
   rootStyle,
+  cardTitle,
+  cardSubTitle,
+  cardIcon = 'appleHealthIcon',
 }: AppleHealthCardProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.taskCard, rootStyle]}>
       <View>
-        <Text text="Physical Activity" size="sm" style={titleTextStyles} />
+        <Text text={cardTitle} size="sm" style={titleTextStyles} />
         <Text
-          text={`Steps: ${Math.round(step)}`}
+          text={`${cardSubTitle} ${Math.round(step)}`}
           size="xs"
           style={[styles.taskResult, stepsTextStyles]}
         />
       </View>
       <View style={styles.taskDetail}>
-        <Icon icon={'appleHealthIcon' as IconTypes} size={30} />
-        <Image
-          source={{
-            uri: Images.nonChecked,
-          }}
-          style={styles.checkIcon}
-        />
+        <Icon icon={cardIcon} size={30} />
       </View>
     </TouchableOpacity>
   );
