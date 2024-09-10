@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Icon, Text } from '.';
 import { getTheme, moderateScale, verticalScale } from '../utils';
+import React from 'react';
 
 interface TodayQuestionCardProps {
   randomQuestion: {
@@ -20,6 +21,7 @@ interface TodayQuestionCardProps {
   buttonStyle?: StyleProp<ViewStyle>;
   todayTitleStyle?: StyleProp<ViewStyle>;
   todayQuestionStyle?: StyleProp<ViewStyle>;
+  wrapperLinearGradientComponent?: React.ReactNode;
 }
 
 const TodayQuestionCard = ({
@@ -30,8 +32,9 @@ const TodayQuestionCard = ({
   buttonStyle,
   todayTitleStyle,
   todayQuestionStyle,
+  wrapperLinearGradientComponent,
 }: TodayQuestionCardProps) => {
-  return (
+  const cardContent = (
     <View style={styles.card ?? cardStyle}>
       <Text
         text={"Today's Question"}
@@ -52,6 +55,14 @@ const TodayQuestionCard = ({
           <Icon icon="journalRight" size={36} />
         </TouchableOpacity>
       </View>
+    </View>
+  );
+
+  return (
+    <View>
+      {React.isValidElement(wrapperLinearGradientComponent)
+        ? React.cloneElement(wrapperLinearGradientComponent, {}, cardContent)
+        : cardContent}
     </View>
   );
 };
