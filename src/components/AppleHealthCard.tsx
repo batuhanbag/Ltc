@@ -46,7 +46,7 @@ const AppleHealthCard = ({
   );
 };
 
-export default AppleHealthCard;
+export { AppleHealthCard };
 
 const styles = StyleSheet.create({
   taskCard: {

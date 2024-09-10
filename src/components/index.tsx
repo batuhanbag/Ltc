@@ -37,3 +37,4 @@ export * from './AuthLine';
 export * from './AuthBottom';
 export * from './BreathingSelectHeader';
 export * from './BreathingSelectCard';
+export * from './AppleHealthCard';
