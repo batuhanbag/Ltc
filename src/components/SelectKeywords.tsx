@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: 3.84,
-    elevation: 5,
   },
   keyword: {
     width: scale(280),

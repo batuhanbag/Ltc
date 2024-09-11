@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.01,
     shadowRadius: 3.84,
-    elevation: 5,
     padding: moderateScale(10),
   },
   breathingMethodTextContainer: {
