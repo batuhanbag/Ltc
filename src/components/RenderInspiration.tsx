@@ -2,6 +2,7 @@ import {
   ImageBackground,
   Pressable,
   StyleSheet,
+  type ImageSourcePropType,
   type StyleProp,
   type TextStyle,
   type ViewStyle,
@@ -31,9 +32,7 @@ const RenderInspiration = ({
       <ImageBackground
         key={`${index}-image`}
         style={styles.renderItem ?? containerStyle}
-        source={{
-          uri: uri,
-        }}
+        source={uri as ImageSourcePropType}
       >
         <Text text={text} style={[styles.renderText, textStyles]} />
       </ImageBackground>

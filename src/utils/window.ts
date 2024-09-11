@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio } from 'react-native';
+import { Dimensions, PixelRatio, Platform } from 'react-native';
 export const { width, height } = Dimensions.get('window');
 
 const guidelineBaseWidth = 350;
@@ -18,6 +18,14 @@ export const isSmallestDevice = (): boolean => {
 
 export const isIpad = (): boolean => {
   return Dimensions.get('window').height > 1000;
+};
+
+export const isIos = (): boolean => {
+  return Platform.OS === 'ios';
+};
+
+export const isAndroid = (): boolean => {
+  return Platform.OS === 'android';
 };
 
 const scale = (size: number): number => (width / guidelineBaseWidth) * size;
