@@ -3,6 +3,7 @@ import {
   Pressable,
   StyleSheet,
   type ImageSourcePropType,
+  type ImageStyle,
   type StyleProp,
   type TextStyle,
   type ViewStyle,
@@ -13,6 +14,7 @@ import { scale, width } from '../utils';
 interface RenderInspirationProps {
   index: number;
   containerStyle?: StyleProp<ViewStyle>;
+  imageContainerStyle?: StyleProp<ImageStyle>;
   onPress: () => void;
   uri: string;
   text: string;
@@ -22,16 +24,17 @@ interface RenderInspirationProps {
 const RenderInspiration = ({
   index,
   containerStyle,
+  imageContainerStyle,
   onPress,
   uri,
   text,
   textStyles,
 }: RenderInspirationProps) => {
   return (
-    <Pressable style={styles.renderItem ?? containerStyle} onPress={onPress}>
+    <Pressable style={[styles.renderItem, containerStyle]} onPress={onPress}>
       <ImageBackground
         key={`${index}-image`}
-        style={styles.renderItem ?? containerStyle}
+        style={[styles.renderItem, imageContainerStyle]}
         source={uri as ImageSourcePropType}
       >
         <Text text={text} style={[styles.renderText, textStyles]} />
