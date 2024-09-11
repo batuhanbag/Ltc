@@ -10,6 +10,7 @@ import {
   type RegisterResponse,
   type ResetPasswordBody,
 } from './interfaces/auth.interface';
+import type { OperationOutcome } from './interfaces/ovok.interface';
 
 class AuthService implements IAuthService {
   public login = async (body: LoginBody): Promise<LoginResponse> => {
@@ -29,7 +30,9 @@ class AuthService implements IAuthService {
     return data;
   };
 
-  public changePassword = async (body: ChangePasswordBody): Promise<any> => {
+  public changePassword = async (
+    body: ChangePasswordBody
+  ): Promise<OperationOutcome> => {
     const { data } = await axiosInstance.post('/auth/change-password', body);
     return data;
   };

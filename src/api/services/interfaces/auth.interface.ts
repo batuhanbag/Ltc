@@ -15,7 +15,7 @@ export interface RegisterBody {
   firstName: string;
   lastName: string;
   projectId: string;
-  resourceType: string;
+  resourceType: UserResourceType;
   sendDefaultEmail: boolean;
   password: string;
   clientId: string;
@@ -27,6 +27,7 @@ export interface RegisterResponse {
   expires_in: number;
 }
 
+export type UserResourceType = 'Patient' | 'Practitioner';
 export interface LoginBody {
   email: string;
   password: string;
@@ -51,9 +52,10 @@ export interface ChangePasswordBody {
 
 export interface ResetPasswordBody {
   email: string;
-  recaptchaToken: string;
+  recaptchaToken?: string;
   sendDefaultEmail: boolean;
-  projectId: string;
+  projectId?: string;
+  recaptchaSiteKey?: string;
 }
 
 export interface AuthMeResponse {
@@ -66,14 +68,14 @@ export interface AuthMeResponse {
 }
 
 export interface Project {
-  resourceType: string;
+  resourceType: UserResourceType;
   id: string;
   name: string;
   strictMode: boolean;
 }
 
 export interface Membership {
-  resourceType: string;
+  resourceType: UserResourceType;
   id: string;
   user: User;
   profile: Profile;
@@ -90,7 +92,7 @@ export interface Profile {
 }
 
 export interface Patient {
-  resourceType: string;
+  resourceType: UserResourceType;
   meta: Meta;
   name: Name[];
   telecom: Telecom[];
@@ -132,7 +134,7 @@ export interface Photo {
 }
 
 export interface Config {
-  resourceType: string;
+  resourceType: UserResourceType;
   menu: Menu[];
 }
 
@@ -147,13 +149,13 @@ export interface Link {
 }
 
 export interface AccessPolicy {
-  resourceType: string;
+  resourceType: UserResourceType;
   resource: Resource[];
   ipAccessRule: any[];
 }
 
 export interface Resource {
-  resourceType: string;
+  resourceType: UserResourceType;
   compartment?: ResourceCompartment;
   readonly?: boolean;
   criteria?: string;
@@ -183,7 +185,7 @@ export interface ForgotPasswordBody {
 }
 
 export interface ForgotPasswordResponse {
-  resourceType: string;
+  resourceType: UserResourceType;
   id: string;
   issue: Issue[];
   extension: Extension[];

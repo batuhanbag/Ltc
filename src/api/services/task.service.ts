@@ -14,10 +14,12 @@ import type {
   CreateTaskRequest,
   CreateTaskResponse,
   ITaskService,
+  Task,
+  TaskUpdate,
   TasksRequest,
   TasksResponse,
   updateTaskRequest,
-} from './interfaces';
+} from './interfaces/task.interface';
 
 class TaskService implements ITaskService {
   public async createGoal(
@@ -42,6 +44,12 @@ class TaskService implements ITaskService {
     );
     return data;
   }
+
+  public async createTask(body: Task): Promise<CreateTaskResponse> {
+    const { data } = await axiosInstance.post('/task', body);
+    return data;
+  }
+
   public async createCarePlan(body: CreateCarePlanRequest): Promise<any> {
     const { data } = await axiosInstance.post(
       '/care-plan',
@@ -71,6 +79,11 @@ class TaskService implements ITaskService {
       type: body.identifier,
     });
     const { data } = await axiosInstance.put(`/task/${reqBody.id}`, reqBody);
+    return data;
+  }
+
+  public async update(id: string, body: TaskUpdate): Promise<Task> {
+    const { data } = await axiosInstance.put(`/task/${id}`, body);
     return data;
   }
 }

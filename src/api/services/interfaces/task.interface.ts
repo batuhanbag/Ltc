@@ -83,7 +83,8 @@ export interface Owner {
 
 export interface Input {
   type: Type;
-  valueString: string;
+  valueString?: string;
+  valueBoolean?: boolean;
 }
 
 export interface Type {
@@ -140,3 +141,5 @@ export interface updateTaskRequest {
   task: any;
   identifier: TasksIdentifier;
 }
+
+export type TaskUpdate = Omit<Task, 'id'>;
