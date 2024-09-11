@@ -1,23 +1,21 @@
 import type { Identifier, Subject } from './task.interface';
 
 export interface IObservationService {
-  createObservation(
-    request: CreateObservationRequest
-  ): Promise<CreateObservationResponse>;
+  createObservation(request: ObservationBody): Promise<ObservationResponse>;
 }
 
-export interface CreateObservationRequest {
+export interface ObservationBody {
   status: string;
   code: string;
-  codeName: string;
+  codeName?: string;
   subject: Subject;
-  effectiveDateTime: string;
-  measurement: Measurement;
-  note: string[];
-  method: string;
-  identifier: Identifier[];
+  effectiveDateTime?: string;
+  measurement?: Measurement;
+  note?: string[];
+  method?: string;
+  identifier?: Identifier[];
 }
-export interface CreateObservationResponse {
+export interface ObservationResponse {
   resourceType: string;
   id: string;
   status: string;

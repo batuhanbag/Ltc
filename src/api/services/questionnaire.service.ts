@@ -1,5 +1,6 @@
 import type {
-  deleteQuestionnaireResponse,
+  CreateQuestionnaireResponse,
+  DeleteQuestionnaireResponse,
   IQuestionnaireService,
   QuestionnaireAnswersRequest,
   QuestionnaireAnswersResponse,
@@ -17,7 +18,14 @@ class QuestionnaireServices implements IQuestionnaireService {
     return data;
   }
 
-  async createQuestionnaireResponse(request: any): Promise<any> {
+  async getQuestionnaireById(id: string): Promise<any> {
+    const { data } = await axiosInstance.get(`/questionnaire/${id}`);
+    return data;
+  }
+
+  async createQuestionnaireResponse(
+    request: CreateQuestionnaireResponse
+  ): Promise<any> {
     const { data } = await axiosInstance.post(
       '/questionnaire-response',
       request
@@ -44,7 +52,7 @@ class QuestionnaireServices implements IQuestionnaireService {
 
   async useDeleteQuestionnaireResponse(
     request: any
-  ): Promise<deleteQuestionnaireResponse> {
+  ): Promise<DeleteQuestionnaireResponse> {
     const { data } = await axiosInstance.delete(
       `/questionnaire-response/${request.id}`
     );

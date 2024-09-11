@@ -1,12 +1,12 @@
 import type { Author } from './auth.interface';
-import type { Identifier } from './task.interface';
+import type { Identifier, Subject } from './task.interface';
 
 export interface IQuestionnaireService {
   useGetQuestionnaire(
     request: QuestionnaireRequest
   ): Promise<QuestionnaireResponse>;
   createQuestionnaireResponse(
-    request: QuestionnaireAnswers
+    request: CreateQuestionnaireResponse
   ): Promise<QuestionnaireAnswers>;
   updateQuestionnaireResponse(
     request: QuestionnaireAnswers
@@ -16,7 +16,7 @@ export interface IQuestionnaireService {
   ): Promise<QuestionnaireAnswersResponse>;
   useDeleteQuestionnaireResponse(
     request: QuestionnaireAnswersRequest
-  ): Promise<deleteQuestionnaireResponse>;
+  ): Promise<DeleteQuestionnaireResponse>;
 }
 
 export interface QuestionnaireRequest {
@@ -76,9 +76,99 @@ export interface Item {
 }
 
 export interface Answer {
-  valueString: string;
+  valueString?: string;
+  valueInteger?: number;
+  valueDate?: string;
+  valueCoding?: string;
 }
 
-export interface deleteQuestionnaireResponse {
+export interface DeleteQuestionnaireResponse {
   id: string;
+}
+
+export interface CreateQuestionnaireResponse {
+  status:
+    | 'in-progress'
+    | 'completed'
+    | 'amended'
+    | 'entered-in-error'
+    | 'stopped';
+  identifier: Identifier;
+  questionnaire: string;
+  subject: Subject;
+  encounter: string;
+  authored: string;
+  author: {
+    type:
+      | 'Device'
+      | 'Patient'
+      | 'Practitioner'
+      | 'RelatedPerson'
+      | 'Organization'
+      | 'Practitioner Role';
+    id: string;
+  };
+  item: QuestionnaireResponseItem;
+}
+
+export interface QuestionnaireResponseItem {
+  linkId: string;
+  text: string;
+  answer: Answer[];
+}
+
+export interface QuestionnaireResponse {
+  resourceType: 'QuestionnaireResponse';
+  id: string;
+  identifier: {
+    system: string;
+    value: string;
+  };
+  status: string;
+  questionnaire: string;
+  subject: {
+    type: string;
+    id: string;
+  };
+  encounter: string;
+  authored: string;
+  author: {
+    type: string;
+    id: string;
+  };
+  item: Array<{
+    linkId: string;
+    text: string;
+    answer: Array<{
+      valueInteger?: number;
+      valueDate?: string;
+      valueString?: string;
+      valueCoding?: string;
+    }>;
+  }>;
+}
+
+export interface UpdateQuestionnaireResponse {
+  status:
+    | 'in-progress'
+    | 'completed'
+    | 'amended'
+    | 'entered-in-error'
+    | 'stopped';
+  identifier: Identifier;
+  questionnaire: string;
+  subject: Subject;
+  encounter: string;
+  authored: string;
+  author: {
+    type:
+      | 'Device'
+      | 'Patient'
+      | 'Practitioner'
+      | 'RelatedPerson'
+      | 'Organization'
+      | 'Practitioner Role';
+    id: string;
+  };
+  item: QuestionnaireResponseItem;
 }
