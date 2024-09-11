@@ -13,43 +13,39 @@ export interface QuestionnaireDataTypes {
   icon: IconTypes;
   name: string;
   duration: number;
-  value:
-    | 'gad-7-questionnaire'
-    | 'who-5-questionnaire'
-    | 'dass-21-questionnaire'
-    | 'phq-9-questionnaire';
+  value: string;
 }
 
 interface QuestionnaireListProps {
-  index: number;
   item: QuestionnaireDataTypes;
-  goToQuestionnairePlay: () => void;
+  onPress: () => void;
   nameTextStyle?: StyleProp<TextStyle>;
   durationTextStyle?: StyleProp<TextStyle>;
+  isVisibleDuration?: boolean;
+  iconSize?: number;
 }
 
 const QuestionnaireList = ({
-  index,
   item,
-  goToQuestionnairePlay,
+  onPress,
   nameTextStyle,
   durationTextStyle,
+  isVisibleDuration = true,
+  iconSize = 40,
 }: QuestionnaireListProps) => {
   return (
-    <TouchableOpacity
-      onPress={goToQuestionnairePlay}
-      style={styles.root}
-      key={`${index}-${item.value}-questionnaire`}
-    >
+    <TouchableOpacity onPress={onPress} style={styles.root}>
       <View style={styles.questionnaireBody}>
-        <Icon icon={item.icon as IconTypes} size={40} />
+        <Icon icon={item.icon as IconTypes} size={iconSize} />
         <View style={styles.textContainer}>
           <Text style={nameTextStyle} text={item.name} size="sm" />
-          <Text
-            style={durationTextStyle}
-            text={`${item.duration} minutes`}
-            size="sm"
-          />
+          {isVisibleDuration && (
+            <Text
+              style={durationTextStyle}
+              text={`${item.duration} minutes`}
+              size="sm"
+            />
+          )}
         </View>
       </View>
       <Icon icon="chevronRight" size={20} />

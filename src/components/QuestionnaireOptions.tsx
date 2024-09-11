@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import {
   TouchableOpacity,
   View,
@@ -5,28 +7,22 @@ import {
   type StyleProp,
   type TextStyle,
 } from 'react-native';
-
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
 import { Text } from './Text';
-import type { ReactNode } from 'react';
 
 interface AnswerOption {
   valueString: string;
 }
 interface QuestionnaireOptionsProps {
   item: AnswerOption;
-  index: number;
   handleSelectAnswer: (answer: string) => void;
-  selectedAnswers: any;
-  currentQuestion: number;
-  checkIconComponent: ReactNode;
+  checkIconComponent?: ReactNode;
   isSelected: boolean;
   optionWidth: number;
   answerTextStyle?: StyleProp<TextStyle>;
 }
 
 const QuestionnaireOptions = ({
-  index,
   item,
   handleSelectAnswer,
   checkIconComponent,
@@ -36,7 +32,6 @@ const QuestionnaireOptions = ({
 }: QuestionnaireOptionsProps) => {
   return (
     <TouchableOpacity
-      key={`${index}-answer`}
       onPress={() => {
         handleSelectAnswer(item.valueString);
       }}
@@ -53,7 +48,7 @@ const QuestionnaireOptions = ({
           },
         ]}
       >
-        {checkIconComponent}
+        {checkIconComponent && checkIconComponent}
         <Text
           text={item?.valueString}
           size="xs"

@@ -23,6 +23,11 @@ class QuestionnaireServices implements IQuestionnaireService {
     return data;
   }
 
+  async getQuestionnaireByName(name: string): Promise<any> {
+    const { data } = await axiosInstance.get(`/questionnaire?name=${name}`);
+    return data;
+  }
+
   async createQuestionnaireResponse(
     request: CreateQuestionnaireResponse
   ): Promise<any> {
