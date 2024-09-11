@@ -10,7 +10,7 @@ import { Icon, Text, type IconTypes } from '.';
 
 import { getTheme, moderateScale, scale, verticalScale, width } from '../utils';
 
-interface AppleHealthCardProps {
+interface HealthCardProps {
   step: number;
   cardTitle?: string;
   cardSubTitle?: string;
@@ -21,7 +21,7 @@ interface AppleHealthCardProps {
   cardIcon?: IconTypes;
 }
 
-const AppleHealthCard = ({
+const HealthCard = ({
   step,
   stepsTextStyles,
   titleTextStyles,
@@ -30,7 +30,7 @@ const AppleHealthCard = ({
   cardTitle,
   cardSubTitle,
   cardIcon = 'appleHealthIcon',
-}: AppleHealthCardProps) => {
+}: HealthCardProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.taskCard, rootStyle]}>
       <View>
@@ -48,7 +48,7 @@ const AppleHealthCard = ({
   );
 };
 
-export { AppleHealthCard };
+export { HealthCard };
 
 const styles = StyleSheet.create({
   taskCard: {
