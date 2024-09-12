@@ -10,24 +10,12 @@ interface MoodScaleProps {
   value: number;
   setValue: (value: number) => void;
   image: string;
-  sliderWidth?: number;
-  sliderHeight?: number;
   imageSize?: { width: number; height: number };
   customStyles?: {
     container?: ViewStyle;
     slider?: ViewStyle;
     image?: ImageStyle;
   };
-  sliderTheme?: {
-    disableMinTrackTintColor?: string;
-    maximumTrackTintColor?: string;
-    minimumTrackTintColor?: string;
-    cacheTrackTintColor?: string;
-  };
-  renderCustomThumb?: () => React.ReactNode;
-  progress?: number;
-  min?: number;
-  max?: number;
   sliderComponent: React.ReactNode;
 }
 

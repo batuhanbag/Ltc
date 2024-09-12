@@ -16,11 +16,12 @@ interface BreathingSelectCardProps {
   item: {
     icon: ImageSourcePropType;
     title: string;
-    goodFor: string;
+    descriptionValue: string;
   };
   titleStyle?: StyleProp<TextStyle>;
-  goodForOneStyle?: StyleProp<TextStyle>;
-  goodForStyle?: StyleProp<TextStyle>;
+  description?: string;
+  descriptionStyle?: StyleProp<TextStyle>;
+  descriptionValueStyle?: StyleProp<TextStyle>;
 }
 
 const BreathingSelectCard = ({
@@ -28,8 +29,9 @@ const BreathingSelectCard = ({
   onPress,
   item,
   titleStyle,
-  goodForOneStyle,
-  goodForStyle,
+  description,
+  descriptionStyle,
+  descriptionValueStyle,
 }: BreathingSelectCardProps) => {
   return (
     <TouchableOpacity
@@ -45,20 +47,22 @@ const BreathingSelectCard = ({
           size="md"
           color={getTheme().colors.black}
         />
-        <View style={styles.goodFor}>
-          <Text
-            style={goodForOneStyle}
-            text="Good for:"
-            size="xs"
-            color={getTheme().colors.black}
-          />
-          <Text
-            style={goodForStyle}
-            text={item.goodFor}
-            size="xs"
-            color={getTheme().colors.primary}
-          />
-        </View>
+        {description && (
+          <View style={styles.goodFor}>
+            <Text
+              style={descriptionStyle}
+              text={description}
+              size="xs"
+              color={getTheme().colors.black}
+            />
+            <Text
+              style={descriptionValueStyle}
+              text={item.descriptionValue}
+              size="xs"
+              color={getTheme().colors.primary}
+            />
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
