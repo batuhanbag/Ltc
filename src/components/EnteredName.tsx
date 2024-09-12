@@ -27,6 +27,7 @@ const EnteredName = ({ name, setName }: EnteredNameProps) => {
         onChangeText={setName}
         placeholder="E.g Helen"
         autoFocus={true}
+        maxLength={30}
         ref={inputRef}
       />
     </View>
