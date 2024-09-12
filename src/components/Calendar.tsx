@@ -85,7 +85,9 @@ const Calendar: React.FC<CalendarProps> = ({
             : props.failureIconName || 'noCalendarCheck'
         }
         size={props.checkIconSize || 24}
-        color={props.checkIconColor || getTheme().colors.primary}
+        color={
+          isPast ? '#BDC9DC' : isToday ? getTheme().colors.primary : '#536274'
+        }
       />
     </View>
   );
