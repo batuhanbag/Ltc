@@ -38,3 +38,4 @@ export * from './AuthBottom';
 export * from './BreathingSelectHeader';
 export * from './BreathingSelectCard';
 export * from './HealthCard';
+export * from './NotNetworkModal';
