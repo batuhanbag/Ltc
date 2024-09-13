@@ -12646,6 +12646,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-health-connect@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "react-native-health-connect@npm:3.1.1"
+  peerDependencies:
+    "@expo/config-plugins": ">= 6.0.2"
+    react: "*"
+    react-native: "*"
+  checksum: 337e54ebe98f03ac8fa222d791b82478f2f690cecbce6e83ae4d073bfb07502684c721d83265d4cb87b06c392aa54912c47330d98d361da104840e837c07de78
+  languageName: node
+  linkType: hard
+
 "react-native-health@npm:^1.18.0":
   version: 1.18.0
   resolution: "react-native-health@npm:1.18.0"
@@ -12700,6 +12711,7 @@ __metadata:
     react-native: 0.74.3
     react-native-builder-bob: ^0.28.1
     react-native-health: ^1.18.0
+    react-native-health-connect: ^3.1.1
     release-it: ^15.0.0
     typescript: ^5.2.2
   peerDependencies:
