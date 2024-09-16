@@ -13,13 +13,7 @@ interface FinalStepProps {
   handleFinish: () => void;
   finishIconComponent: React.ReactNode;
   progressComponent: React.ReactNode;
-  fakeLoadingData: (
-    progress: number,
-    t: any
-  ) => {
-    text: string;
-    isFinish: boolean;
-  }[];
+
   fakeLoadingTimeout: (
     setProgress: React.Dispatch<React.SetStateAction<number>>,
     handleFinish: () => void
@@ -29,6 +23,10 @@ interface FinalStepProps {
   itemTextStyle?: StyleProp<TextStyle>;
   finalProgressTextStyle?: StyleProp<TextStyle>;
   rootStyle?: StyleProp<TextStyle>;
+  stepContent?: {
+    text: string;
+    isFinish: boolean;
+  }[];
   t: any;
 }
 
@@ -36,22 +34,18 @@ const FinalStep = ({
   handleFinish,
   finishIconComponent,
   progressComponent,
-  fakeLoadingData,
   fakeLoadingTimeout,
   setProgress,
   progress,
   itemTextStyle,
   finalProgressTextStyle,
   rootStyle,
-  t,
+  stepContent,
 }: FinalStepProps) => {
   React.useEffect(() => {
     fakeLoadingTimeout(setProgress, handleFinish);
   }, []);
 
-  const stepContent = React.useMemo(() => {
-    return fakeLoadingData(progress, t);
-  }, [progress]);
   return (
     <View style={[styles.root, rootStyle]}>
       <View style={styles.stepContentContainer}>
