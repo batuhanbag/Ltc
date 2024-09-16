@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   View,
   type StyleProp,
@@ -38,7 +38,6 @@ interface CalendarProps {
   completedIconName: IconTypes;
   failureIconName: IconTypes;
   textStyle?: StyleProp<TextStyle>;
-  locale?: string;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
@@ -47,16 +46,9 @@ const Calendar: React.FC<CalendarProps> = ({
   customDateCheck,
   completedDates,
   textStyle,
-  locale,
   ...props
 }) => {
   const styles = useStyles(props);
-
-  useEffect(() => {
-    if (locale) {
-      moment.locale(locale);
-    }
-  }, [locale]);
 
   const completed = React.useMemo(() => {
     return completedDate(completedDates, day.date);
