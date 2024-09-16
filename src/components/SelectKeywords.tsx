@@ -36,6 +36,8 @@ interface SelectKeywordsProps {
   questionContainerStyle?: StyleProp<ViewStyle>;
   questionTextStyle?: StyleProp<TextStyle>;
   question: string;
+  title: string;
+  description: string;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -50,6 +52,8 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   questionContainerStyle,
   questionTextStyle,
   question,
+  title,
+  description,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
@@ -104,7 +108,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
         <>
           <View style={styles.progressBarContainer}>
             <Text
-              text={`Question: ${currentQuestion}/${questionsLength}`}
+              text={`${title} ${currentQuestion}/${questionsLength}`}
               size="sm"
               color={getTheme().colors.primary}
               style={titleTextStyle}
@@ -112,7 +116,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
           </View>
           <View style={styles.currentQuestion}>
             <Text
-              text="Over the past 2 weeks, how often have you been bothered by any of the following problems:"
+              text={description}
               size="xs"
               color={getTheme().colors.gray}
               style={descriptionTextStyle}
