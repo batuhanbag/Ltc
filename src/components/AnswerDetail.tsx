@@ -21,8 +21,8 @@ interface AnswerDetailProps {
   dateTextStyle?: StyleProp<TextStyle>;
   questionTextStyle?: StyleProp<TextStyle>;
   answerTextStyle?: StyleProp<TextStyle>;
-  todayText: string;
-  yesterdayText: string;
+  todayText?: string;
+  yesterdayText?: string;
 }
 
 const AnswerDetail = ({
