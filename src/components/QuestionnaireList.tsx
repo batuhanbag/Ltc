@@ -23,6 +23,7 @@ interface QuestionnaireListProps {
   durationTextStyle?: StyleProp<TextStyle>;
   isVisibleDuration?: boolean;
   iconSize?: number;
+  minutesText?: string;
 }
 
 const QuestionnaireList = ({
@@ -32,6 +33,7 @@ const QuestionnaireList = ({
   durationTextStyle,
   isVisibleDuration = true,
   iconSize = 40,
+  minutesText,
 }: QuestionnaireListProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.root}>
@@ -42,7 +44,7 @@ const QuestionnaireList = ({
           {isVisibleDuration && (
             <Text
               style={durationTextStyle}
-              text={`${item.duration} minutes`}
+              text={`${item.duration} ${minutesText}`}
               size="sm"
             />
           )}
