@@ -21,6 +21,8 @@ interface AnswerDetailProps {
   dateTextStyle?: StyleProp<TextStyle>;
   questionTextStyle?: StyleProp<TextStyle>;
   answerTextStyle?: StyleProp<TextStyle>;
+  todayText: string;
+  yesterdayText: string;
 }
 
 const AnswerDetail = ({
@@ -30,19 +32,22 @@ const AnswerDetail = ({
   dateTextStyle,
   questionTextStyle,
   answerTextStyle,
+  todayText,
+  yesterdayText,
 }: AnswerDetailProps) => {
   const today = moment().format('YYYY-MM-DD');
 
   const dateManipulation = React.useCallback(
     (date: string) => {
       if (date === today) {
-        return 'Today';
+        return todayText;
       } else if (date === moment().subtract(1, 'days').format('YYYY-MM-DD')) {
-        return 'Yesterday';
+        return yesterdayText;
       } else {
         return moment(date).format('DD.MM.YYYY');
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [today]
   );
 
