@@ -25,6 +25,7 @@ interface BreathingSettingsCardProps {
   leftIconPress?: () => void;
   rightIconPress?: () => void;
   disabled?: boolean;
+  breathsText?: string;
 }
 
 const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
@@ -38,11 +39,11 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
   valueTextStyle,
   breathsTextStyle,
   buttonContainerStyle,
-
   maxValue = Infinity,
   leftIconPress,
   rightIconPress,
   disabled = false,
+  breathsText,
 }) => {
   const styles = createStyles(backgroundColor);
 
@@ -63,7 +64,7 @@ const BreathingSettingsCard: React.FC<BreathingSettingsCardProps> = ({
           style={valueTextStyle}
         />
         <Text
-          text={'Breaths'}
+          text={breathsText}
           color={getTheme().colors.gray}
           size="xxs"
           style={breathsTextStyle}
