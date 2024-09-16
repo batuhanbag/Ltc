@@ -22,6 +22,7 @@ interface TodayQuestionCardProps {
   todayTitleStyle?: StyleProp<ViewStyle>;
   todayQuestionStyle?: StyleProp<ViewStyle>;
   wrapperLinearGradientComponent?: React.ReactNode;
+  title?: string;
 }
 
 const TodayQuestionCard = ({
@@ -33,11 +34,12 @@ const TodayQuestionCard = ({
   todayTitleStyle,
   todayQuestionStyle,
   wrapperLinearGradientComponent,
+  title,
 }: TodayQuestionCardProps) => {
   const cardContent = (
     <View style={cardStyle}>
       <Text
-        text={"Today's Question"}
+        text={title}
         size="xs"
         color={getTheme().colors.black}
         style={todayTitleStyle}
