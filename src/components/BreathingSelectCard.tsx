@@ -1,15 +1,14 @@
 import {
-  Image,
   StyleSheet,
   TouchableOpacity,
   View,
   type ImageSourcePropType,
-  type ImageStyle,
   type StyleProp,
   type TextStyle,
 } from 'react-native';
 import { Text } from './Text';
 import { getTheme, moderateScale, scale, verticalScale } from '../utils';
+import { AutoImage } from './AutoImage';
 
 interface BreathingSelectCardProps {
   index: number;
@@ -23,7 +22,10 @@ interface BreathingSelectCardProps {
   description?: string;
   descriptionStyle?: StyleProp<TextStyle>;
   descriptionValueStyle?: StyleProp<TextStyle>;
-  imageStyle?: StyleProp<ImageStyle>;
+  imageStyle?: {
+    maxWidth?: number;
+    maxHeight?: number;
+  };
 }
 
 const BreathingSelectCard = ({
@@ -42,7 +44,12 @@ const BreathingSelectCard = ({
       onPress={onPress}
       style={styles.breathingMethod}
     >
-      <Image source={item.icon as ImageSourcePropType} style={imageStyle} />
+      <AutoImage
+        source={item.icon as ImageSourcePropType}
+        style={imageStyle}
+        maxWidth={imageStyle?.maxWidth}
+        maxHeight={imageStyle?.maxHeight}
+      />
       <View style={styles.breathingMethodTextContainer}>
         <Text
           style={titleStyle}
