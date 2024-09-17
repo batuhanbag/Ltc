@@ -107,6 +107,8 @@ const TextInput = (props: TextInputProps) => {
     }
   };
 
+  const placeholderColor = value ? '#161513' : '#A0A09F';
+
   return (
     <React.Fragment>
       <View>
@@ -143,10 +145,15 @@ const TextInput = (props: TextInputProps) => {
             autoCorrect={autoCorrect}
             multiline={multiline}
             autoFocus={autoFocus}
-            placeholderTextColor={colors.placeholder || '#161513'}
+            placeholderTextColor={placeholderColor}
             numberOfLines={numberOfLines}
             maxLength={maxLength}
-            style={[styles.input, inputStyle, style]}
+            style={[
+              styles.input,
+              inputStyle,
+              style,
+              { color: placeholderColor },
+            ]}
             editable={editable}
             onBlur={handleBlur}
             onFocus={handleFocus}
