@@ -143,7 +143,7 @@ const TextInput = (props: TextInputProps) => {
             autoCorrect={autoCorrect}
             multiline={multiline}
             autoFocus={autoFocus}
-            placeholderTextColor={colors.placeholder}
+            placeholderTextColor={colors.placeholder || '#161513'}
             numberOfLines={numberOfLines}
             maxLength={maxLength}
             style={[styles.input, inputStyle, style]}
