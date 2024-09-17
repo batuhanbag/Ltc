@@ -22,6 +22,7 @@ interface BreathingSelectCardProps {
   description?: string;
   descriptionStyle?: StyleProp<TextStyle>;
   descriptionValueStyle?: StyleProp<TextStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
 }
 
 const BreathingSelectCard = ({
@@ -32,6 +33,7 @@ const BreathingSelectCard = ({
   description,
   descriptionStyle,
   descriptionValueStyle,
+  imageStyle,
 }: BreathingSelectCardProps) => {
   return (
     <TouchableOpacity
@@ -39,7 +41,7 @@ const BreathingSelectCard = ({
       onPress={onPress}
       style={styles.breathingMethod}
     >
-      <Image source={item.icon as ImageSourcePropType} />
+      <Image source={item.icon as ImageSourcePropType} style={imageStyle} />
       <View style={styles.breathingMethodTextContainer}>
         <Text
           style={titleStyle}
