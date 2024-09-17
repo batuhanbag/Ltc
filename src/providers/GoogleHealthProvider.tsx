@@ -7,7 +7,7 @@ import {
 import type { TimeRangeFilter } from 'react-native-health-connect/lib/typescript/types/base.types';
 import { isAndroid } from '../utils';
 
-export interface HealthData {
+export interface GoogleHealthData {
   steps: Step[];
 }
 
@@ -35,7 +35,7 @@ export interface Device {
 }
 
 type HealthContextType = {
-  googleHealthData: HealthData | undefined;
+  googleHealthData: GoogleHealthData | undefined;
   requestPermissionsAndFetchData: () => Promise<boolean>;
 };
 
@@ -44,7 +44,7 @@ const HealthContext = createContext<HealthContextType | undefined>(undefined);
 const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [googleHealthData, setHealthData] = useState<HealthData>();
+  const [googleHealthData, setHealthData] = useState<GoogleHealthData>();
 
   const getYearlyStepDataOptions = () => {
     const endDate = new Date();
@@ -60,11 +60,16 @@ const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
   };
 
-  const initializeHealthConnect = async (): Promise<boolean> => {
+  const requestPermissionsAndFetchData = async (): Promise<boolean> => {
+    if (!isAndroid) {
+      console.log('Google Health is only available on Android');
+      return false;
+    }
+
     try {
       const isInitialized = await initialize();
       if (!isInitialized) {
-        console.error('Health Connect başlatılamadı');
+        console.error('Failed to initialize Health Connect');
         return false;
       }
 
@@ -73,19 +78,10 @@ const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
       ]);
 
       if (!grantedPermissions) {
-        console.error('İzinler verilmedi');
+        console.error('Permissions not granted');
         return false;
       }
 
-      return true;
-    } catch (error) {
-      console.error('Health Connect başlatılırken hata oluştu', error);
-      return false;
-    }
-  };
-
-  const fetchHealthData = async () => {
-    try {
       const { records } = await readRecords(
         'Steps',
         getYearlyStepDataOptions()
@@ -94,23 +90,15 @@ const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
       setHealthData({
         steps: records as Step[],
       });
-    } catch (error) {
-      console.error('Sağlık verileri çekilirken hata oluştu', error);
-    }
-  };
 
-  const requestPermissionsAndFetchData = async (): Promise<boolean> => {
-    if (!isAndroid) {
-      console.log("Google Health sadece Android'de kullanılabilir");
+      return true;
+    } catch (error) {
+      console.error(
+        'Error initializing Health Connect or fetching data',
+        error
+      );
       return false;
     }
-
-    const initialized = await initializeHealthConnect();
-    if (initialized) {
-      await fetchHealthData();
-      return true;
-    }
-    return false;
   };
 
   return (
@@ -126,7 +114,7 @@ const useGoogleHealthData = () => {
   const context = useContext(HealthContext);
   if (context === undefined) {
     throw new Error(
-      'useGoogleHealthData bir GoogleHealthProvider içinde kullanılmalıdır'
+      'useGoogleHealthData must be used within a GoogleHealthProvider'
     );
   }
   return context;
