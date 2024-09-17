@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   View,
   type ImageSourcePropType,
+  type ImageStyle,
   type StyleProp,
   type TextStyle,
 } from 'react-native';
