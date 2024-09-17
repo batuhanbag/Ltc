@@ -36,7 +36,7 @@ interface SelectKeywordsProps {
   questionContainerStyle?: StyleProp<ViewStyle>;
   questionTextStyle?: StyleProp<TextStyle>;
   question: string;
-  title: string;
+  title?: string;
   description: string;
 }
 
