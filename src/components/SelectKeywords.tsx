@@ -106,14 +106,16 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
       scrollEnabled={false}
       ListHeaderComponent={
         <>
-          <View style={styles.progressBarContainer}>
-            <Text
-              text={`${title} ${currentQuestion}/${questionsLength}`}
-              size="sm"
-              color={getTheme().colors.primary}
-              style={titleTextStyle}
-            />
-          </View>
+          {title && (
+            <View style={styles.progressBarContainer}>
+              <Text
+                text={`${title} ${currentQuestion}/${questionsLength}`}
+                size="sm"
+                color={getTheme().colors.primary}
+                style={titleTextStyle}
+              />
+            </View>
+          )}
           <View style={styles.currentQuestion}>
             <Text
               text={description}

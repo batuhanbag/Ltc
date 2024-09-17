@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Platform } from 'react-native';
 import AppleHealthKit, {
   type HealthPermission,
@@ -9,13 +9,14 @@ import AppleHealthKit, {
 
 const isIOS = Platform.OS === 'ios';
 
-type HealthData = {
+export type HealthData = {
   steps?: number;
   walkDistance?: number;
 };
 
 type HealthContextType = {
   healthData: HealthData;
+  requestPermissionsAndFetchData: () => Promise<boolean>;
 };
 
 const HealthContext = createContext<HealthContextType | undefined>(undefined);
@@ -40,41 +41,33 @@ const AppleHealthProvider: React.FC<{
   readPermissions: HealthPermission[];
   writePermissions: HealthPermission[];
 }> = ({ children, healthOptions, readPermissions, writePermissions }) => {
-  const [hasPermissions, setHasPermission] = useState<boolean>(false);
   const [healthData, setHealthData] = useState<HealthData>({});
 
-  useEffect(() => {
-    if (!isIOS) {
-      console.log('Not an iOS device');
-      return;
-    }
-
-    AppleHealthKit.initHealthKit(
-      generatePermissions(readPermissions, writePermissions),
-      (err) => {
-        if (err) {
-          console.error(
-            'Error initializing HealthKit and getting permissions',
-            err
-          );
-          return;
+  const requestHealthPermissions = async (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      AppleHealthKit.initHealthKit(
+        generatePermissions(readPermissions, writePermissions),
+        (err) => {
+          if (err) {
+            console.error(
+              'HealthKit başlatılırken ve izinler alınırken hata oluştu',
+              err
+            );
+            resolve(false);
+          } else {
+            resolve(true);
+          }
         }
-        setHasPermission(true);
-      }
-    );
-  }, []);
+      );
+    });
+  };
 
-  useEffect(() => {
-    if (!hasPermissions) {
-      console.log('No permissions to fetch health data');
-      return;
-    }
-
+  const fetchHealthData = () => {
     const options: HealthInputOptions = healthOptions;
 
     AppleHealthKit.getStepCount(options, (err: any, results: any) => {
       if (err) {
-        console.error('Error getting the steps', err);
+        console.error('Adım sayısı alınırken hata oluştu', err);
         return;
       }
       setHealthData((prev) => ({
@@ -87,7 +80,7 @@ const AppleHealthProvider: React.FC<{
       options,
       (err: any, results: any) => {
         if (err) {
-          console.error('Error getting the walking/running distance', err);
+          console.error('Yürüme/koşma mesafesi alınırken hata oluştu', err);
           return;
         }
         setHealthData((prev) => ({
@@ -96,10 +89,26 @@ const AppleHealthProvider: React.FC<{
         }));
       }
     );
-  }, [hasPermissions]);
+  };
+
+  const requestPermissionsAndFetchData = async (): Promise<boolean> => {
+    if (!isIOS) {
+      console.log('iOS cihazı değil');
+      return false;
+    }
+
+    const permissionsGranted = await requestHealthPermissions();
+    if (permissionsGranted) {
+      fetchHealthData();
+      return true;
+    }
+    return false;
+  };
 
   return (
-    <HealthContext.Provider value={{ healthData }}>
+    <HealthContext.Provider
+      value={{ healthData, requestPermissionsAndFetchData }}
+    >
       {children}
     </HealthContext.Provider>
   );
@@ -108,7 +117,7 @@ const AppleHealthProvider: React.FC<{
 const useHealthData = () => {
   const context = useContext(HealthContext);
   if (context === undefined) {
-    throw new Error('useHealthData must be used within a HealthProvider');
+    throw new Error('useHealthData bir HealthProvider içinde kullanılmalıdır');
   }
   return context;
 };

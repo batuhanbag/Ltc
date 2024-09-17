@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import {
   initialize,
   requestPermission,
@@ -36,6 +36,7 @@ export interface Device {
 
 type HealthContextType = {
   googleHealthData: HealthData | undefined;
+  requestPermissionsAndFetchData: () => Promise<boolean>;
 };
 
 const HealthContext = createContext<HealthContextType | undefined>(undefined);
@@ -43,7 +44,6 @@ const HealthContext = createContext<HealthContextType | undefined>(undefined);
 const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [hasPermissions, setHasPermission] = useState<boolean>(false);
   const [googleHealthData, setHealthData] = useState<HealthData>();
 
   const getYearlyStepDataOptions = () => {
@@ -60,64 +60,63 @@ const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
   };
 
-  useEffect(() => {
+  const initializeHealthConnect = async (): Promise<boolean> => {
+    try {
+      const isInitialized = await initialize();
+      if (!isInitialized) {
+        console.error('Health Connect başlatılamadı');
+        return false;
+      }
+
+      const grantedPermissions = await requestPermission([
+        { accessType: 'read', recordType: 'Steps' },
+      ]);
+
+      if (!grantedPermissions) {
+        console.error('İzinler verilmedi');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Health Connect başlatılırken hata oluştu', error);
+      return false;
+    }
+  };
+
+  const fetchHealthData = async () => {
+    try {
+      const { records } = await readRecords(
+        'Steps',
+        getYearlyStepDataOptions()
+      );
+
+      setHealthData({
+        steps: records as Step[],
+      });
+    } catch (error) {
+      console.error('Sağlık verileri çekilirken hata oluştu', error);
+    }
+  };
+
+  const requestPermissionsAndFetchData = async (): Promise<boolean> => {
     if (!isAndroid) {
-      console.log('Google Health is only available on Android');
-      return;
+      console.log("Google Health sadece Android'de kullanılabilir");
+      return false;
     }
 
-    const initializeHealthConnect = async () => {
-      try {
-        const isInitialized = await initialize();
-        if (!isInitialized) {
-          console.error('Failed to initialize Health Connect');
-          return;
-        }
-
-        const grantedPermissions = await requestPermission([
-          { accessType: 'read', recordType: 'Steps' },
-        ]);
-
-        if (!grantedPermissions) {
-          console.error('Permissions not granted');
-          return;
-        }
-
-        setHasPermission(true);
-      } catch (error) {
-        console.error('Error initializing Health Connect', error);
-      }
-    };
-
-    initializeHealthConnect();
-  }, []);
-
-  useEffect(() => {
-    if (!hasPermissions) {
-      console.log('No permissions to fetch health data');
-      return;
+    const initialized = await initializeHealthConnect();
+    if (initialized) {
+      await fetchHealthData();
+      return true;
     }
-
-    const fetchHealthData = async () => {
-      try {
-        const { records } = await readRecords(
-          'Steps',
-          getYearlyStepDataOptions()
-        );
-
-        setHealthData({
-          steps: records as Step[],
-        });
-      } catch (error) {
-        console.error('Error fetching health data', error);
-      }
-    };
-
-    fetchHealthData();
-  }, [hasPermissions]);
+    return false;
+  };
 
   return (
-    <HealthContext.Provider value={{ googleHealthData }}>
+    <HealthContext.Provider
+      value={{ googleHealthData, requestPermissionsAndFetchData }}
+    >
       {children}
     </HealthContext.Provider>
   );
@@ -126,7 +125,9 @@ const GoogleHealthProvider: React.FC<{ children: React.ReactNode }> = ({
 const useGoogleHealthData = () => {
   const context = useContext(HealthContext);
   if (context === undefined) {
-    throw new Error('useHealthData must be used within a GoogleHealthProvider');
+    throw new Error(
+      'useGoogleHealthData bir GoogleHealthProvider içinde kullanılmalıdır'
+    );
   }
   return context;
 };
