@@ -163,7 +163,7 @@ const ButtonComponent: React.FC<DefualtButtonProps> = ({
       : size === 'medium'
         ? styles.medium
         : styles.pill,
-    disabled && { backgroundColor: colors.gray },
+    disabled && { backgroundColor: '#ECECEC' },
     (type === 'tertiary' || type === 'pill') && {
       borderWidth: 1,
       borderColor: disabled ? colors.gray : colors.primary,
