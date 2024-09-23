@@ -39,6 +39,7 @@ interface SelectKeywordsProps {
   title?: string;
   description: string;
   multiple?: boolean;
+  maxMultipleSelection?: number;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -56,6 +57,7 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   title,
   description,
   multiple = false,
+  maxMultipleSelection = 2,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
@@ -66,7 +68,11 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
         if (currentSelected.includes(value)) {
           newSelected = currentSelected.filter((item) => item !== value);
         } else {
-          newSelected = [...currentSelected, value];
+          if (currentSelected.length < maxMultipleSelection) {
+            newSelected = [...currentSelected, value];
+          } else {
+            return;
+          }
         }
       } else {
         newSelected = [value];
@@ -77,7 +83,13 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
         [currentQuestion]: newSelected,
       });
     },
-    [currentQuestion, selectedAnswers, setSelectedAnswers, multiple]
+    [
+      currentQuestion,
+      selectedAnswers,
+      setSelectedAnswers,
+      multiple,
+      maxMultipleSelection,
+    ]
   );
 
   const renderAnswers = useCallback(
