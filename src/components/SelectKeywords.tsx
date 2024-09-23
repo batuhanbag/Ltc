@@ -26,8 +26,8 @@ interface AnswerOption {
 
 interface SelectKeywordsProps {
   keywords: QuestionnaireAnswersItem[];
-  selectedAnswers?: Record<number, string>;
-  setSelectedAnswers?: (answers: Record<number, string>) => void;
+  selectedAnswers?: Record<number, string[]>;
+  setSelectedAnswers?: (answers: Record<number, string[]>) => void;
   currentQuestion: number;
   questionsLength: number;
   valueTextStyle?: StyleProp<TextStyle>;
@@ -38,6 +38,7 @@ interface SelectKeywordsProps {
   question: string;
   title?: string;
   description: string;
+  multiple?: boolean;
 }
 
 const SelectKeywords: React.FC<SelectKeywordsProps> = ({
@@ -54,20 +55,36 @@ const SelectKeywords: React.FC<SelectKeywordsProps> = ({
   question,
   title,
   description,
+  multiple = false,
 }) => {
   const handleSelectKeywords = useCallback(
     (value: string) => {
+      const currentSelected = selectedAnswers[currentQuestion] || [];
+      let newSelected;
+
+      if (multiple) {
+        if (currentSelected.includes(value)) {
+          newSelected = currentSelected.filter((item) => item !== value);
+        } else {
+          newSelected = [...currentSelected, value];
+        }
+      } else {
+        newSelected = [value];
+      }
+
       setSelectedAnswers?.({
         ...selectedAnswers,
-        [currentQuestion]: value,
+        [currentQuestion]: newSelected,
       });
     },
-    [currentQuestion, selectedAnswers, setSelectedAnswers]
+    [currentQuestion, selectedAnswers, setSelectedAnswers, multiple]
   );
 
   const renderAnswers = useCallback(
     ({ item }: { item: AnswerOption }) => {
-      const isSelected = selectedAnswers[currentQuestion] === item.valueString;
+      const isSelected = selectedAnswers[currentQuestion]?.includes(
+        item.valueString
+      );
 
       return (
         <TouchableOpacity
