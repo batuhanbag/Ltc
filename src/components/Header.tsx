@@ -50,6 +50,8 @@ const Header = ({
         return styles.singleCenter;
       case 'single':
         return styles.single;
+      case 'double':
+        return styles.double;
       default:
         return styles.headerContainer;
     }
@@ -81,6 +83,10 @@ const styles = StyleSheet.create({
   },
   single: {
     justifyContent: 'flex-start',
+  },
+  double: {
+    justifyContent: 'space-between',
+    width: '100%',
   },
   singleCenter: {
     justifyContent: 'center',
