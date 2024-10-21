@@ -3,6 +3,7 @@ import {
   View,
   type StyleProp,
   type TextStyle,
+  type ViewStyle,
 } from 'react-native';
 import {
   getTheme,
@@ -48,6 +49,7 @@ interface TaskCardProps {
   successIcon: IconTypes;
   failureIcon: IconTypes;
   circleIconSize?: number;
+  rootStyle?: StyleProp<ViewStyle>;
 }
 
 const TaskCard = ({
@@ -66,7 +68,7 @@ const TaskCard = ({
     <TouchableOpacity
       key={`${key}-task`}
       onPress={onTaskPress}
-      style={styles.taskCard}
+      style={[styles.taskCard, props.rootStyle]}
     >
       <Text
         text={task.name}
