@@ -75,8 +75,9 @@ class TaskService implements ITaskService {
   public async updateTask(body: updateTaskRequest): Promise<any> {
     const filterTask = filterTasksByIdentifier(body.task, body.identifier);
     const reqBody = generateUpdateTaskBody({
-      task: filterTask[0],
-      type: body.identifier,
+      task: filterTask[0].resource,
+      // @ts-ignore
+      type: body?.identifier[0]?.value,
     });
     const { data } = await axiosInstance.put(`/task/${reqBody.id}`, reqBody);
     return data;
