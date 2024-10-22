@@ -64,20 +64,19 @@ class TaskService implements ITaskService {
   }
   public async getTasks({
     userId,
-    code,
+    category,
     status,
   }: TasksRequest): Promise<TasksResponse> {
     const { data } = await axiosInstance.get(
-      `fhir/Task?owner=Patient/${userId}&code=${code}&status=${status}`
+      `/task?owner=Patient/${userId}&patient=Patient/${userId}&category=${category}&status=${status}`
     );
     return data;
   }
   public async updateTask(body: updateTaskRequest): Promise<any> {
     const filterTask = filterTasksByIdentifier(body.task, body.identifier);
     const reqBody = generateUpdateTaskBody({
-      task: filterTask[0].resource,
-      // @ts-ignore
-      type: body?.identifier[0]?.value,
+      task: filterTask[0],
+      type: body.identifier,
     });
     const { data } = await axiosInstance.put(`/task/${reqBody.id}`, reqBody);
     return data;
