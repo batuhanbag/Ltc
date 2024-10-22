@@ -14,7 +14,7 @@ export function filterTasksByIdentifier(
   identifierValue: any
 ): any[] {
   return tasksData?.filter((task) =>
-    task?.identifier?.some(
+    task?.resource?.identifier?.some(
       (identifier: any) =>
         identifier?.value?.toLowerCase() === identifierValue?.toLowerCase()
     )
