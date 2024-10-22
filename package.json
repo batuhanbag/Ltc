@@ -1,6 +1,6 @@
 {
   "name": "react-native-lifetech-components",
-  "version": "0.100.4",
+  "version": "0.100.5",
   "description": "LifeTech Studio React Native Components ",
   "source": "./src/index",
   "main": "./lib/commonjs/index.js",
