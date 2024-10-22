@@ -44,7 +44,9 @@ class AuthService implements IAuthService {
 
   public deleteUserAccount = async (isSoftDelete: boolean): Promise<any> => {
     const { data } = await axiosInstance.delete('auth/deregister-user', {
-      data: isSoftDelete,
+      data: {
+        deleteAllUserData: isSoftDelete,
+      },
     });
     return data;
   };
