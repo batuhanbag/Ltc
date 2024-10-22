@@ -68,7 +68,7 @@ class TaskService implements ITaskService {
     status,
   }: TasksRequest): Promise<TasksResponse> {
     const { data } = await axiosInstance.get(
-      `/task?owner=Patient/${userId}&patient=Patient/${userId}&category=${category}&status=${status}`
+      `/task?owner=Patient/${userId}&code=${category}&status=${status}`
     );
     return data;
   }
