@@ -64,11 +64,11 @@ class TaskService implements ITaskService {
   }
   public async getTasks({
     userId,
-    category,
+    code,
     status,
   }: TasksRequest): Promise<TasksResponse> {
     const { data } = await axiosInstance.get(
-      `/task?owner=Patient/${userId}&patient=Patient/${userId}&category=${category}&status=${status}`
+      `fhir/Task?owner=Patient/${userId}&code=${code}&status=${status}`
     );
     return data;
   }

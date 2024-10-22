@@ -98,7 +98,7 @@ export interface Identifier {
 
 export interface TasksRequest {
   userId: string;
-  category: string;
+  code: string;
   status: string;
 }
 
