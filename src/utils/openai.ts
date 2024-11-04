@@ -31,7 +31,10 @@ export const getAIResponse = (response: GPTResponse): string => {
   const { choices } = response;
   return choices[0]?.message.content ?? '';
 };
-export async function makeGPTRequest(userPrompt: string): Promise<GPTResponse> {
+export async function makeGPTRequest(
+  userPrompt: string,
+  taskList: string[]
+): Promise<GPTResponse> {
   const { botId } = OvokGPTValues;
 
   if (botId === undefined) {
@@ -41,16 +44,18 @@ export async function makeGPTRequest(userPrompt: string): Promise<GPTResponse> {
     `/bot/${botId}/execute`,
     {
       userPrompt,
+      taskList,
     }
   );
   return data;
 }
 
 export const makeUserChatGPTRequest = async (
-  userPrompt: string
+  userPrompt: string,
+  taskList: string[]
 ): Promise<string> => {
   try {
-    const gptRequestResponse = await makeGPTRequest(userPrompt);
+    const gptRequestResponse = await makeGPTRequest(userPrompt, taskList);
     return getAIResponse(gptRequestResponse);
   } catch (error) {
     return `${error}`;
