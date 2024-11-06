@@ -33,7 +33,8 @@ export const getAIResponse = (response: GPTResponse): string => {
 };
 export async function makeGPTRequest(
   userPrompt: string,
-  taskList: string[]
+  taskList: string[],
+  language: string
 ): Promise<GPTResponse> {
   const { botId } = OvokGPTValues;
 
@@ -45,6 +46,7 @@ export async function makeGPTRequest(
     {
       userPrompt,
       taskList,
+      language,
     }
   );
   return data;
@@ -52,10 +54,15 @@ export async function makeGPTRequest(
 
 export const makeUserChatGPTRequest = async (
   userPrompt: string,
-  taskList: string[]
+  taskList: string[],
+  language: string
 ): Promise<string> => {
   try {
-    const gptRequestResponse = await makeGPTRequest(userPrompt, taskList);
+    const gptRequestResponse = await makeGPTRequest(
+      userPrompt,
+      taskList,
+      language
+    );
     return getAIResponse(gptRequestResponse);
   } catch (error) {
     return `${error}`;
